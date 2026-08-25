@@ -8,7 +8,7 @@
 
 **Inject VR Rooms into any Visual Pinball X table — no VR source required.**
 
-[![Version](https://img.shields.io/badge/version-0.93-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
+[![Version](https://img.shields.io/badge/version-0.94-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey?style=flat-square&logo=windows)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 
@@ -61,7 +61,7 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 | WPC Williams | Classic Williams |
 | Bally | Classic Bally |
 | Showcase | Display showcase style |
-| Old School | EM / early SS era |
+| Old School | EM / early SS era |  for EM tables, you need to add a directb2s with the same name as generated VR table
 | + more... | |
 
 ---
@@ -113,7 +113,7 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 | WPC Williams | Williams classique |
 | Bally | Bally classique |
 | Showcase | Style vitrine d'exposition |
-| Old School | Ère EM / early SS |
+| Old School | Ère EM / early SS | Pour les tables EM, vous devez mettre un fichier directb2s du même nom que la table VR générée dans le même dossier
 | + d'autres... | |
 
 ---
