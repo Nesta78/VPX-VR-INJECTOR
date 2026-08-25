@@ -66,24 +66,6 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 
 ---
 
-### 🛠️ Building from Source
-
-```bash
-git clone https://github.com/Nesta78/VPX-VR-INJECTOR.git
-cd VPX-VR-INJECTOR
-pip install -r requirements.txt
-python vpx_vr_injector_gui.py
-```
-
-To build the standalone executable:
-
-```bash
-python build_exe.py
-# Output: dist/VpxVRInjector.zip
-```
-
----
-
 ---
 
 ## 🇫🇷 Français
@@ -133,24 +115,6 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 | Showcase | Style vitrine d'exposition |
 | Old School | Ère EM / early SS |
 | + d'autres... | |
-
----
-
-### 🛠️ Compiler depuis les sources
-
-```bash
-git clone https://github.com/Nesta78/VPX-VR-INJECTOR.git
-cd VPX-VR-INJECTOR
-pip install -r requirements.txt
-python vpx_vr_injector_gui.py
-```
-
-Pour générer l'exécutable autonome :
-
-```bash
-python build_exe.py
-# Sortie : dist/VpxVRInjector.zip
-```
 
 ---
 
