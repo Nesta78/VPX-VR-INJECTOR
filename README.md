@@ -47,6 +47,8 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 5. **Choose** a VR Pack from the list
 6. **Inject** — done! Open the output file in Visual Pinball X with VR mode enabled
 
+7. for EM tables, you need to add a directb2s with the same name as generated VR table in the same folder
+
 > **Requirements:** Windows 10/11
 
 ---
@@ -61,7 +63,7 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 | WPC Williams | Classic Williams |
 | Bally | Classic Bally |
 | Showcase | Display showcase style |
-| Old School | EM / early SS era |  for EM tables, you need to add a directb2s with the same name as generated VR table
+| Old School | EM / early SS era |  
 | + more... | |
 
 ---
@@ -99,6 +101,8 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 5. **Choisissez** un VR Pack dans la liste
 6. **Injectez** — c'est tout ! Ouvrez le fichier de sortie dans Visual Pinball X avec le mode VR activé
 
+7. Pour les tables EM, vous devez mettre un fichier directb2s du même nom que la table VR générée dans le même dossier
+
 > **Configuration requise :** Windows 10/11 — Visual Pinball X 10.7+
 
 ---
@@ -113,7 +117,7 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 | WPC Williams | Williams classique |
 | Bally | Bally classique |
 | Showcase | Style vitrine d'exposition |
-| Old School | Ère EM / early SS | Pour les tables EM, vous devez mettre un fichier directb2s du même nom que la table VR générée dans le même dossier
+| Old School | Ère EM / early SS | 
 | + d'autres... | |
 
 ---
