@@ -8,7 +8,7 @@
 
 **Inject VR Rooms into any Visual Pinball X table — no VR source required.**
 
-[![Version](https://img.shields.io/badge/version-0.96-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
+[![Version](https://img.shields.io/badge/version-0.97-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey?style=flat-square&logo=windows)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 
@@ -37,14 +37,20 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 - 🖼️ **Source table image extraction — new in 0.96** — browse artwork embedded in the original VPX and reuse it for the VR cabinet
 - 🔎 **Smart artwork suggestions** — likely backglass, cabinet, blades, speaker, apron and other useful images are highlighted automatically
 - 👁️ **Hover previews** for extracted table images
-- 🧩 **Texture Editor** — multi-layer composition, positioning, scaling, rotation, mirroring and layer reordering
+- 🧩 **Texture Editor** — multi-layer composition, positioning, scaling, rotation, mirroring, keyboard nudging and layer reordering
+- ⇋ **Duplicate to opposite side — new in 0.97** — instantly create a mirrored, symmetrically positioned copy for cabinet side artwork
+- 🪟 **Improved editor windows — new in 0.97** — native minimize/maximize controls and more comfortable editing
 - ⧉ **Duplicate layers — new in 0.96**
 - 🗂️ **Available Images inside the editor — new in 0.96** — add an extracted source-table image directly as a new layer
 - 🎭 **Smart `*_Empty` mask workflow** — when available, the selected artwork is placed underneath the pack mask automatically
 - 🔢 **DigitGrid / Flasher DMD support** — automatic detection and repositioning for non-standard VPX displays
+- 🌐 **Mixed Reality 360° sphere — new in 0.97** — optional MR sphere with Green, Magenta, White or Black chroma-key colors
+- 🎚️ **In-game VR/MR switch — new in 0.97** — use the VPX F12 menu to switch between the standard VR Room and Mixed Reality
+- 🧱 **Safer material injection — new in 0.97** — fixes duplicated / missing materials and pink VR objects on affected tables
 - 🌐 **Bilingual interface** — English and French (FR/EN)
 - 🔔 **Update checker** — notified when a new version is available on GitHub
 - 🛡️ **Non-destructive** — the injected table is saved separately and an optional backup can be created
+- 🖥️ **Improved layout — new in 0.97** — scrollable options panel, always-visible Inject VR button and a more compact log area
 - ⚙️ **Standalone executable** — no Python installation required; just download and run
 
 ---
@@ -65,19 +71,27 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 
 ---
 
-### 🆕 What's new in 0.96
+### 🆕 What's new in 0.97
 
-Version **0.96** focuses on artwork reuse and faster VR cabinet customization:
+Version **0.97** focuses on Mixed Reality support, texture-editor usability, material reliability and pack accuracy:
 
-- **Generic value presets** can be created, deleted, imported and exported as `.vrippreset` files.
-- Images embedded in the **source VPX table** can be extracted automatically.
-- The injector suggests useful artwork candidates while still providing a **Show all** view.
-- Extracted images can be previewed by **hovering their names**.
-- **Use as...** can send an extracted image directly to a compatible texture slot.
-- When a matching `*_Empty` mask exists, the editor automatically places the selected artwork **under the mask**.
-- Layers can now be **duplicated**.
-- The texture editor includes an **Available Images** browser so extracted source-table artwork can be added without leaving the editor.
-- Image extraction was made more robust by validating and normalizing embedded images before preview/use.
+- **Optional 360° Mixed Reality sphere** can be injected with the VR Room.
+- Four MR sphere colors are available: **Green** (`0,255,0`), **Magenta** (`255,0,255`), **White** (`255,255,255`) and **Black** (`0,0,0`).
+- When the MR option is enabled, the generated table receives a **VPX F12 option** to switch between **VR Room** and **Mixed Reality** while in game.
+- The standard **VR Room remains the default** when the table starts.
+- The texture editor now supports **keyboard nudging**: arrow keys move the active image by 1 px, while **Shift + Arrow** moves it by 10 px.
+- Image resizing from corners was corrected so dragging outward always enlarges and dragging inward always reduces, including mirrored artwork.
+- **Duplicate to opposite side** automatically creates/updates a mirrored copy and positions it symmetrically across the vertical center line — ideal for cabinet side art.
+- Texture-editor windows now use the **native Windows minimize / maximize / restore / close controls**.
+- Material injection was reworked to correctly keep legacy and modern VPX material structures synchronized, preventing **duplicated material entries / Dear ImGui ID conflict warnings**.
+- Material availability checks were hardened to prevent VR objects from referencing materials that were not actually injected, fixing affected **pink / magenta objects**.
+- The **Bally pack** was refreshed from a new reference VR Room, preserving its updated material definitions.
+- Bally backglass adaptation was corrected so the backglass keeps the reference scale instead of being distorted by automatic table-length scaling.
+- Selected **WPC95 Bally / WPC95 Williams** VR metal parts now use **Metal Chrome** where configured in the 0.97 packs.
+- The main interface was compacted: the right-side options area is **scrollable**, **Inject VR stays visible**, and the **LOG panel is smaller**.
+
+All 0.96 artwork-extraction, Generic preset, `*_Empty` mask and editor features remain available in 0.97.
+
 
 ### 📦 Included VR Packs
 
@@ -115,14 +129,20 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 - 🖼️ **Extraction des images de la table source — nouveauté 0.96** — réutilisez les artworks intégrés au fichier VPX
 - 🔎 **Suggestions intelligentes d'artworks** — backglass, cabinet, blades, speaker, apron et autres images utiles sont mises en avant
 - 👁️ **Aperçu au survol** des images extraites
-- 🧩 **Éditeur de textures** — calques multiples, déplacement, redimensionnement, rotation, miroir et réorganisation
+- 🧩 **Éditeur de textures** — calques multiples, déplacement, redimensionnement, rotation, miroir, ajustement au clavier et réorganisation
+- ⇋ **Dupliquer à l'opposé — nouveauté 0.97** — crée instantanément une copie miroir positionnée symétriquement pour les side arts du cabinet
+- 🪟 **Fenêtres d'édition améliorées — nouveauté 0.97** — boutons Windows natifs réduire / agrandir / restaurer
 - ⧉ **Duplication des calques — nouveauté 0.96**
 - 🗂️ **Images disponibles dans l'éditeur — nouveauté 0.96** — ajout direct d'une image extraite comme nouveau calque
 - 🎭 **Gestion intelligente des masques `*_Empty`** — l'artwork choisi est automatiquement placé sous le masque du pack
 - 🔢 **Support des DMD DigitGrid / Flashers** — détection et repositionnement automatiques des affichages VPX non standards
+- 🌐 **Sphère 360° Mixed Reality — nouveauté 0.97** — sphère MR optionnelle avec couleurs Vert, Magenta, Blanc ou Noir
+- 🎚️ **Bascule VR/MR en jeu — nouveauté 0.97** — le menu F12 de VPX permet de passer de la VR Room standard à la Mixed Reality
+- 🧱 **Injection des matériaux fiabilisée — nouveauté 0.97** — correction des matériaux dupliqués / manquants et des objets VR roses
 - 🌐 **Interface bilingue** — Français et Anglais (FR/EN)
 - 🔔 **Vérificateur de mises à jour** — notification lorsqu'une nouvelle version est disponible sur GitHub
 - 🛡️ **Non-destructif** — la table injectée est sauvegardée séparément et une sauvegarde optionnelle peut être créée
+- 🖥️ **Interface optimisée — nouveauté 0.97** — panneau d'options scrollable, bouton Injecter VR toujours visible et zone LOG plus compacte
 - ⚙️ **Exécutable autonome** — aucune installation de Python requise ; téléchargez et lancez directement
 
 ---
@@ -143,19 +163,27 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 
 ---
 
-### 🆕 Nouveautés 0.96
+### 🆕 Nouveautés 0.97
 
-La version **0.96** améliore surtout la réutilisation des artworks et la personnalisation du cabinet VR :
+La version **0.97** apporte surtout le support Mixed Reality, des améliorations importantes de l'éditeur de textures, une injection des matériaux plus fiable et plusieurs corrections de packs :
 
-- Les **presets de valeurs Generic** peuvent être créés, supprimés, importés et exportés au format `.vrippreset`.
-- Les images intégrées dans la **table VPX source** peuvent être extraites automatiquement.
-- Le logiciel propose une sélection d'images potentiellement utiles tout en conservant un affichage **Tout afficher**.
-- Les images extraites disposent d'un **aperçu au survol**.
-- **Utiliser comme...** permet d'envoyer une image extraite directement vers un slot compatible.
-- Lorsqu'un masque `*_Empty` correspondant existe, l'éditeur place automatiquement l'artwork **sous le masque**.
-- Les calques peuvent maintenant être **dupliqués**.
-- L'éditeur dispose d'un bouton **Images disponibles** pour ajouter les artworks extraits sans revenir à l'écran principal.
-- L'extraction des images a été renforcée grâce à une validation et une normalisation des formats avant aperçu/utilisation.
+- Une **sphère 360° Mixed Reality** peut maintenant être injectée en option avec la VR Room.
+- Quatre couleurs de sphère MR sont proposées : **Vert** (`0,255,0`), **Magenta** (`255,0,255`), **Blanc** (`255,255,255`) et **Noir** (`0,0,0`).
+- Si l'option MR est activée, la table générée reçoit une option **F12 dans VPX** permettant de basculer en jeu entre **VR Room** et **Mixed Reality**.
+- La **VR Room standard reste le mode par défaut** au lancement de la table.
+- L'éditeur de textures permet maintenant le **déplacement précis au clavier** : les flèches déplacent l'image active de 1 px, et **Shift + Flèche** de 10 px.
+- Le redimensionnement par les coins a été corrigé : tirer vers l'extérieur agrandit toujours l'image et revenir vers l'intérieur la réduit, y compris sur une image en miroir.
+- Le bouton **Dupliquer à l'opposé** crée/met à jour automatiquement une copie miroir et la place symétriquement par rapport à l'axe vertical central — idéal pour les side arts de caisse.
+- Les fenêtres de l'éditeur utilisent maintenant les boutons **Windows natifs réduire / agrandir / restaurer / fermer**.
+- L'injection des matériaux VPX a été revue afin de synchroniser correctement les structures legacy et modernes, ce qui supprime les **doublons de matériaux / warnings Dear ImGui d'ID en conflit**.
+- Les vérifications des matériaux réellement injectés ont été renforcées afin d'éviter les références invalides responsables d'**objets roses / magenta**.
+- Le **pack Bally** a été reconstruit à partir d'une nouvelle VR Room de référence tout en conservant ses matériaux mis à jour.
+- L'adaptation du backglass Bally a été corrigée afin qu'il conserve l'échelle de référence au lieu d'être déformé par le redimensionnement automatique lié à la longueur de la table.
+- Certaines pièces métalliques VR des packs **WPC95 Bally / WPC95 Williams** utilisent désormais **Metal Chrome** conformément aux réglages de la 0.97.
+- L'interface principale a été compactée : panneau droit **scrollable**, bouton **Injecter VR toujours visible** et zone **LOG réduite**.
+
+Toutes les fonctions de la 0.96 liées à l'extraction d'images, aux presets Generic, aux masques `*_Empty` et à l'éditeur restent disponibles dans la 0.97.
+
 
 ### 📦 VR Packs inclus
 
