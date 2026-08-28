@@ -8,7 +8,7 @@
 
 **Inject VR Rooms into any Visual Pinball X table — no VR source required.**
 
-[![Version](https://img.shields.io/badge/version-1.0-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
+[![Version](https://img.shields.io/badge/version-1.1-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey?style=flat-square&logo=windows)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 
@@ -34,23 +34,30 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 - 📦 **Curated VR Packs** — Stern Modern, Data East Classic, WPC95, WPC Williams, Bally, Showcase, Old School, and more
 - ⚡ **Automatic VR Room scaling** based on the source table playfield dimensions
 - 🎛️ **Generic value presets** — save, delete, import and export reusable Width / Length / X / Y / Z adjustments
-- 🖼️ **Source table image extraction — new in 0.96** — browse artwork embedded in the original VPX and reuse it for the VR cabinet
+- ↔️ **Centered Generic X coordinate — new in 1.0** — `X = 0` keeps the cabinet horizontally centered while Width changes
+- ℹ️ **Old School proportional-dimension warning — new in 1.0** — clearly explains that large Width / Length values are proportional and can create very large geometry changes
+- 🖼️ **Source table image extraction** — browse artwork embedded in the original VPX and reuse it for the VR cabinet
 - 🔎 **Smart artwork suggestions** — likely backglass, cabinet, blades, speaker, apron and other useful images are highlighted automatically
 - 👁️ **Hover previews** for extracted table images
+- ✨ **Gemini artwork assistant — new in 1.1** — select several images extracted from the source table, choose a target texture slot, and prepare a slot-specific prompt plus the correct green-mask template for Gemini Web
+- 🧠 **Slot-aware Gemini prompts — new in 1.1** — dedicated instructions for Cabinet, Backbox, Backglass, VR Walls, Floor and Roof, including strict green-mask preservation and cabinet-side orientation rules
+- 📂 **Automatic Gemini bundle — new in 1.1** — creates a temporary folder containing the selected reference images, the matching green template and a text copy of the generated prompt
 - 🧩 **Texture Editor** — multi-layer composition, positioning, scaling, rotation, mirroring, keyboard nudging and layer reordering
-- ⇋ **Duplicate to opposite side — new in 0.97** — instantly create a mirrored, symmetrically positioned copy for cabinet side artwork
-- 🪟 **Improved editor windows — new in 0.97** — native minimize/maximize controls and more comfortable editing
-- ⧉ **Duplicate layers — new in 0.96**
-- 🗂️ **Available Images inside the editor — new in 0.96** — add an extracted source-table image directly as a new layer
+- 📋 **Paste image as a new layer — new in 1.1** — use the Paste Image button or `Ctrl+V` to add an image from the Windows clipboard directly into the editor
+- ✨ **Gemini assistant from the editor — new in 1.1** — launches the same multi-reference Gemini workflow available from the main window
+- ⇋ **Duplicate to opposite side** — instantly create a mirrored, symmetrically positioned copy for cabinet side artwork
+- 🪟 **Improved editor windows** — native minimize/maximize controls and more comfortable editing
+- ⧉ **Duplicate layers**
+- 🗂️ **Available Images inside the editor** — add an extracted source-table image directly as a new layer
 - 🎭 **Smart `*_Empty` mask workflow** — when available, the selected artwork is placed underneath the pack mask automatically
 - 🔢 **DigitGrid / Flasher DMD support** — automatic detection and repositioning for non-standard VPX displays
-- 🌐 **Mixed Reality 360° sphere — new in 0.97** — optional MR sphere with Green, Magenta, White or Black chroma-key colors
-- 🎚️ **In-game VR/MR switch — new in 0.97** — use the VPX F12 menu to switch between the standard VR Room and Mixed Reality
-- 🧱 **Safer material injection — new in 0.97** — fixes duplicated / missing materials and pink VR objects on affected tables
+- 🌐 **Mixed Reality 360° sphere** — optional MR sphere with Green, Magenta, White or Black chroma-key colors
+- 🎚️ **In-game VR/MR switch** — use the VPX F12 menu to switch between the standard VR Room and Mixed Reality
+- 🧱 **Safer material injection** — fixes duplicated / missing materials and pink VR objects on affected tables
 - 🌐 **Bilingual interface** — English and French (FR/EN)
 - 🔔 **Update checker** — notified when a new version is available on GitHub
 - 🛡️ **Non-destructive** — the injected table is saved separately and an optional backup can be created
-- 🖥️ **Improved layout — new in 0.97** — scrollable options panel, always-visible Inject VR button and a more compact log area
+- 🖥️ **Improved layout** — scrollable options panel, always-visible Inject VR button and a more compact log area
 - ⚙️ **Standalone executable** — no Python installation required; just download and run
 
 ---
@@ -71,26 +78,26 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 
 ---
 
-### 🆕 What's new in 0.97
+### 🆕 What's new in 1.1
 
-Version **0.97** focuses on Mixed Reality support, texture-editor usability, material reliability and pack accuracy:
+Version **1.1** focuses on artwork creation and makes it much easier to build custom VR textures from the artwork already stored inside a VPX table.
 
-- **Optional 360° Mixed Reality sphere** can be injected with the VR Room.
-- Four MR sphere colors are available: **Green** (`0,255,0`), **Magenta** (`255,0,255`), **White** (`255,255,255`) and **Black** (`0,0,0`).
-- When the MR option is enabled, the generated table receives a **VPX F12 option** to switch between **VR Room** and **Mixed Reality** while in game.
-- The standard **VR Room remains the default** when the table starts.
-- The texture editor now supports **keyboard nudging**: arrow keys move the active image by 1 px, while **Shift + Arrow** moves it by 10 px.
-- Image resizing from corners was corrected so dragging outward always enlarges and dragging inward always reduces, including mirrored artwork.
-- **Duplicate to opposite side** automatically creates/updates a mirrored copy and positions it symmetrically across the vertical center line — ideal for cabinet side art.
-- Texture-editor windows now use the **native Windows minimize / maximize / restore / close controls**.
-- Material injection was reworked to correctly keep legacy and modern VPX material structures synchronized, preventing **duplicated material entries / Dear ImGui ID conflict warnings**.
-- Material availability checks were hardened to prevent VR objects from referencing materials that were not actually injected, fixing affected **pink / magenta objects**.
-- The **Bally pack** was refreshed from a new reference VR Room, preserving its updated material definitions.
-- Bally backglass adaptation was corrected so the backglass keeps the reference scale instead of being distorted by automatic table-length scaling.
-- Selected **WPC95 Bally / WPC95 Williams** VR metal parts now use **Metal Chrome** where configured in the 0.97 packs.
-- The main interface was compacted: the right-side options area is **scrollable**, **Inject VR stays visible**, and the **LOG panel is smaller**.
+- **Generate artwork with Gemini** is now available directly from the main window.
+- Select **multiple source-table images** and use them together as visual references for Gemini.
+- Choose the target slot before generation: **Cabinet, Backbox, Backglass, VR Wall Left, VR Wall Right, Floor or Roof**, depending on the selected pack and available templates.
+- VPX VR Injector automatically selects the matching **green-mask template** for the current VR pack and target slot.
+- The generated Gemini prompt is **slot-specific**. Cabinet prompts include mirrored side-art rules, 90° side-panel orientation, protected hardware/cutouts and strict instructions to fill every green pixel without painting outside the mask.
+- A dedicated temporary folder is created containing the selected reference images, the correct template and `gemini_prompt.txt`.
+- The prompt is copied to the clipboard and VPX VR Injector opens the temporary folder and Gemini Web. Drag the prepared images into Gemini and paste the prompt to generate the artwork.
+- The workflow uses **Gemini Web**, so VPX VR Injector does not require a Gemini API key, paid API integration or its own AI server.
+- The built-in texture editor can now **paste an image from the clipboard as a new layer** using the Paste Image button or `Ctrl+V` — useful for bringing a Gemini result straight back into the editor.
+- The texture editor now exposes the **same Generate artwork with Gemini assistant** as the main window instead of a separate simplified workflow.
+- Generic X positioning uses a **centered coordinate system**: `X = 0` keeps the cabinet horizontally centered when Width changes.
+- Old School dimensions now display a contextual warning because **Width / Length are proportional adjustments**; very large values can cause very large geometry changes.
 
-All 0.96 artwork-extraction, Generic preset, `*_Empty` mask and editor features remain available in 0.97.
+All previous Mixed Reality, source-image extraction, Generic preset, DigitGrid, material-injection and texture-editor features remain available in 1.1.
+
+> **Gemini workflow note:** generated results still depend on Gemini following the supplied mask instructions. The green templates and prompts are designed to strongly constrain the result, but the final image should always be visually checked before use.
 
 
 ### 📦 Included VR Packs
@@ -126,23 +133,30 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 - 📦 **VR Packs sélectionnés** — Stern Modern, Data East Classic, WPC95, WPC Williams, Bally, Showcase, Old School, et plus encore
 - ⚡ **Adaptation automatique de la VR Room** aux dimensions du playfield de la table source
 - 🎛️ **Presets de valeurs Generic** — sauvegarde, suppression, import et export des réglages Width / Length / X / Y / Z
-- 🖼️ **Extraction des images de la table source — nouveauté 0.96** — réutilisez les artworks intégrés au fichier VPX
+- ↔️ **Coordonnée X Generic centrée — nouveauté 1.0** — `X = 0` conserve le cabinet centré horizontalement lorsque Width change
+- ℹ️ **Avertissement dimensions Old School — nouveauté 1.0** — indique clairement que Width / Length sont proportionnels et que de grandes valeurs peuvent provoquer de très grands changements de géométrie
+- 🖼️ **Extraction des images de la table source** — réutilisez les artworks intégrés au fichier VPX
 - 🔎 **Suggestions intelligentes d'artworks** — backglass, cabinet, blades, speaker, apron et autres images utiles sont mises en avant
 - 👁️ **Aperçu au survol** des images extraites
+- ✨ **Assistant de génération d'artwork avec Gemini — nouveauté 1.1** — sélectionnez plusieurs images extraites de la table source, choisissez un slot cible et préparez automatiquement un prompt adapté ainsi que le bon template à masque vert pour Gemini Web
+- 🧠 **Prompts Gemini adaptés au slot — nouveauté 1.1** — instructions dédiées pour Cabinet, Backbox, Backglass, murs VR, sol et plafond, avec respect strict du masque vert et règles d'orientation spécifiques au cabinet
+- 📂 **Dossier Gemini automatique — nouveauté 1.1** — création d'un dossier temporaire contenant les images de référence sélectionnées, le template vert correspondant et une copie texte du prompt généré
 - 🧩 **Éditeur de textures** — calques multiples, déplacement, redimensionnement, rotation, miroir, ajustement au clavier et réorganisation
-- ⇋ **Dupliquer à l'opposé — nouveauté 0.97** — crée instantanément une copie miroir positionnée symétriquement pour les side arts du cabinet
-- 🪟 **Fenêtres d'édition améliorées — nouveauté 0.97** — boutons Windows natifs réduire / agrandir / restaurer
-- ⧉ **Duplication des calques — nouveauté 0.96**
-- 🗂️ **Images disponibles dans l'éditeur — nouveauté 0.96** — ajout direct d'une image extraite comme nouveau calque
+- 📋 **Coller une image comme nouveau calque — nouveauté 1.1** — utilisez le bouton Coller une image ou `Ctrl+V` pour ajouter directement dans l'éditeur une image présente dans le presse-papiers Windows
+- ✨ **Assistant Gemini depuis l'éditeur — nouveauté 1.1** — ouvre le même workflow multi-images que celui disponible depuis la fenêtre principale
+- ⇋ **Dupliquer à l'opposé** — crée instantanément une copie miroir positionnée symétriquement pour les side arts du cabinet
+- 🪟 **Fenêtres d'édition améliorées** — boutons Windows natifs réduire / agrandir / restaurer
+- ⧉ **Duplication des calques**
+- 🗂️ **Images disponibles dans l'éditeur** — ajout direct d'une image extraite comme nouveau calque
 - 🎭 **Gestion intelligente des masques `*_Empty`** — l'artwork choisi est automatiquement placé sous le masque du pack
 - 🔢 **Support des DMD DigitGrid / Flashers** — détection et repositionnement automatiques des affichages VPX non standards
-- 🌐 **Sphère 360° Mixed Reality — nouveauté 0.97** — sphère MR optionnelle avec couleurs Vert, Magenta, Blanc ou Noir
-- 🎚️ **Bascule VR/MR en jeu — nouveauté 0.97** — le menu F12 de VPX permet de passer de la VR Room standard à la Mixed Reality
-- 🧱 **Injection des matériaux fiabilisée — nouveauté 0.97** — correction des matériaux dupliqués / manquants et des objets VR roses
+- 🌐 **Sphère 360° Mixed Reality** — sphère MR optionnelle avec couleurs Vert, Magenta, Blanc ou Noir
+- 🎚️ **Bascule VR/MR en jeu** — le menu F12 de VPX permet de passer de la VR Room standard à la Mixed Reality
+- 🧱 **Injection des matériaux fiabilisée** — correction des matériaux dupliqués / manquants et des objets VR roses
 - 🌐 **Interface bilingue** — Français et Anglais (FR/EN)
 - 🔔 **Vérificateur de mises à jour** — notification lorsqu'une nouvelle version est disponible sur GitHub
 - 🛡️ **Non-destructif** — la table injectée est sauvegardée séparément et une sauvegarde optionnelle peut être créée
-- 🖥️ **Interface optimisée — nouveauté 0.97** — panneau d'options scrollable, bouton Injecter VR toujours visible et zone LOG plus compacte
+- 🖥️ **Interface optimisée** — panneau d'options scrollable, bouton Injecter VR toujours visible et zone LOG plus compacte
 - ⚙️ **Exécutable autonome** — aucune installation de Python requise ; téléchargez et lancez directement
 
 ---
@@ -163,26 +177,26 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 
 ---
 
-### 🆕 Nouveautés 0.97
+### 🆕 Nouveautés 1.1
 
-La version **0.97** apporte surtout le support Mixed Reality, des améliorations importantes de l'éditeur de textures, une injection des matériaux plus fiable et plusieurs corrections de packs :
+La version **1.1** se concentre sur la création d'artworks et facilite fortement la fabrication de textures VR personnalisées à partir des images déjà présentes dans une table VPX.
 
-- Une **sphère 360° Mixed Reality** peut maintenant être injectée en option avec la VR Room.
-- Quatre couleurs de sphère MR sont proposées : **Vert** (`0,255,0`), **Magenta** (`255,0,255`), **Blanc** (`255,255,255`) et **Noir** (`0,0,0`).
-- Si l'option MR est activée, la table générée reçoit une option **F12 dans VPX** permettant de basculer en jeu entre **VR Room** et **Mixed Reality**.
-- La **VR Room standard reste le mode par défaut** au lancement de la table.
-- L'éditeur de textures permet maintenant le **déplacement précis au clavier** : les flèches déplacent l'image active de 1 px, et **Shift + Flèche** de 10 px.
-- Le redimensionnement par les coins a été corrigé : tirer vers l'extérieur agrandit toujours l'image et revenir vers l'intérieur la réduit, y compris sur une image en miroir.
-- Le bouton **Dupliquer à l'opposé** crée/met à jour automatiquement une copie miroir et la place symétriquement par rapport à l'axe vertical central — idéal pour les side arts de caisse.
-- Les fenêtres de l'éditeur utilisent maintenant les boutons **Windows natifs réduire / agrandir / restaurer / fermer**.
-- L'injection des matériaux VPX a été revue afin de synchroniser correctement les structures legacy et modernes, ce qui supprime les **doublons de matériaux / warnings Dear ImGui d'ID en conflit**.
-- Les vérifications des matériaux réellement injectés ont été renforcées afin d'éviter les références invalides responsables d'**objets roses / magenta**.
-- Le **pack Bally** a été reconstruit à partir d'une nouvelle VR Room de référence tout en conservant ses matériaux mis à jour.
-- L'adaptation du backglass Bally a été corrigée afin qu'il conserve l'échelle de référence au lieu d'être déformé par le redimensionnement automatique lié à la longueur de la table.
-- Certaines pièces métalliques VR des packs **WPC95 Bally / WPC95 Williams** utilisent désormais **Metal Chrome** conformément aux réglages de la 0.97.
-- L'interface principale a été compactée : panneau droit **scrollable**, bouton **Injecter VR toujours visible** et zone **LOG réduite**.
+- Le bouton **Générer un artwork avec Gemini** est maintenant disponible directement dans la fenêtre principale.
+- Vous pouvez sélectionner **plusieurs images de la table source** et les utiliser ensemble comme références visuelles dans Gemini.
+- Choisissez le slot à générer : **Cabinet, Backbox, Backglass, Mur VR gauche, Mur VR droit, Sol ou Plafond**, selon le pack sélectionné et les templates disponibles.
+- VPX VR Injector sélectionne automatiquement le **template à masque vert** correspondant au pack VR et au slot cible.
+- Le prompt Gemini est **adapté au slot**. Pour le Cabinet, il intègre notamment les règles de miroir des sides, leur orientation à 90°, la protection des éléments matériels/découpes et des consignes strictes pour remplir tous les pixels verts sans dépasser du masque.
+- Un dossier temporaire dédié est créé avec les images de référence sélectionnées, le bon template et un fichier `gemini_prompt.txt`.
+- Le prompt est copié dans le presse-papiers et VPX VR Injector ouvre le dossier temporaire ainsi que Gemini Web. Il suffit ensuite de glisser les images préparées dans Gemini et de coller le prompt.
+- Le workflow utilise **Gemini Web** : VPX VR Injector n'a donc besoin ni d'une clé API Gemini, ni d'une API payante, ni de son propre serveur IA.
+- L'éditeur de textures permet maintenant de **coller une image du presse-papiers comme nouveau calque** via le bouton Coller une image ou `Ctrl+V` — idéal pour réimporter immédiatement une génération Gemini.
+- L'éditeur utilise désormais le **même assistant Générer un artwork avec Gemini** que la fenêtre principale, au lieu d'un workflow Gemini séparé et simplifié.
+- Le positionnement Generic en X utilise maintenant un **repère centré** : `X = 0` conserve le cabinet centré horizontalement lorsque Width change.
+- Les dimensions du pack Old School affichent désormais un avertissement contextuel : **Width / Length sont des ajustements proportionnels** et des valeurs très élevées peuvent provoquer de très grands changements de géométrie.
 
-Toutes les fonctions de la 0.96 liées à l'extraction d'images, aux presets Generic, aux masques `*_Empty` et à l'éditeur restent disponibles dans la 0.97.
+Toutes les fonctions précédentes concernant la Mixed Reality, l'extraction d'images, les presets Generic, DigitGrid, l'injection des matériaux et l'éditeur restent disponibles dans la 1.1.
+
+> **À propos de Gemini :** le résultat final dépend toujours de la façon dont Gemini respecte les consignes du masque. Les templates verts et les prompts sont conçus pour fortement contraindre la génération, mais il reste conseillé de vérifier visuellement l'image avant de l'utiliser.
 
 
 ### 📦 VR Packs inclus
