@@ -8,7 +8,7 @@
 
 **Inject VR Rooms into any Visual Pinball X table — no VR source required.**
 
-[![Version](https://img.shields.io/badge/version-1.4-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
+[![Version](https://img.shields.io/badge/version-1.5-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey?style=flat-square&logo=windows)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 
@@ -54,6 +54,12 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 - 🧩 **Texture Editor** — multi-layer composition, positioning, scaling, rotation, mirroring, keyboard nudging and layer reordering
 - 📋 **Paste image as a new layer — new in 1.1** — use the Paste Image button or `Ctrl+V` to add an image from the Windows clipboard directly into the editor
 - ✨ **Gemini assistant from the editor — new in 1.1** — launches the same multi-reference Gemini workflow available from the main window
+- 🎨 **Gemini Artwork Studio — new in 1.5** — prepare several artwork slots in one guided session while reusing the same reference selection and Gemini conversation
+- 🧭 **Context-aware Gemini target — new in 1.5** — when Gemini is opened from the texture editor, the slot currently being edited is selected automatically
+- 📋 **Reliable manual Gemini prompt workflow — new in 1.5** — prompts are copied to the clipboard but never pasted automatically; prepared image bundles are opened for manual drag-and-drop into the same Gemini conversation
+- 📥 **HD Gemini result import — new in 1.5** — import the downloaded high-resolution result directly into the correct slot; when a matching `*_Empty` mask exists, the editor automatically places it above the generated artwork
+- ✂️ **Inline layer crop — new in 1.5** — crop the selected layer directly inside the texture editor canvas while preserving the cropped artwork's visible size and position
+- 🕹️ **Progressive VR plunger animation — new in 1.5** — the injected `PinCab_Shooter` follows a progressive pull/release animation instead of jumping instantly to full travel
 - ⇋ **Duplicate to opposite side** — instantly create a mirrored, symmetrically positioned copy for cabinet side artwork
 - 🪟 **Improved editor windows** — native minimize/maximize controls and more comfortable editing
 - ⧉ **Duplicate layers**
@@ -64,7 +70,7 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 - 🎚️ **In-game VR/MR switch** — use the VPX F12 menu to switch between the standard VR Room and Mixed Reality
 - 🧱 **Safer material injection** — fixes duplicated / missing materials and pink VR objects on affected tables
 - 🌐 **Bilingual interface** — English and French (FR/EN)
-- 🔔 **Update checker** — notified when a new version is available on GitHub
+- 🔄 **Automatic portable updater — new in 1.4** — checks GitHub Releases automatically, downloads and validates the update, safely replaces the portable installation, rolls back on failure and relaunches VPX VR Injector
 - 🛡️ **Non-destructive** — the injected table is saved separately and an optional backup can be created
 - 🖥️ **Improved layout** — scrollable options panel, always-visible Inject VR button and a more compact log area
 - ⚙️ **Standalone executable** — no Python installation required; just download and run
@@ -78,7 +84,7 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 3. **Run** `VpxVRInjector.exe`
 4. **Select** your `.vpx` table file
 5. **Choose** a VR Pack from the list
-6. Optionally reuse images embedded in the source table or customize them in the built-in editor
+6. Optionally reuse images embedded in the source table, customize them in the built-in editor, crop layers directly on the canvas, or prepare artwork with Gemini / Gemini Artwork Studio
 7. Optionally open **🧹 VR Cleanup** to hide source-table objects that should not remain visible in VR.
 8. Optionally open the **3D VR Room Preview** to inspect the cabinet and Room before injection.
 9. **Inject** — choose where to save the generated `.vpx` file, then open it in Visual Pinball X with VR mode enabled.
@@ -91,7 +97,7 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 
 ---
 
-### 🆕 What's new in 1.2 and 1.3
+### 🆕 What's new in 1.2 → 1.5
 
 #### Version 1.2
 
@@ -115,6 +121,26 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 - VR Cleanup supports the different VPX visibility fields used by Ramps, Primitives, Flashers, Flippers, Triggers, Gates, Spinners and other supported object types.
 - **Original backup is now disabled by default**, while remaining available as an optional safety feature.
 
+#### Version 1.4
+
+- Added a **fully automatic portable updater** based on GitHub Releases.
+- VPX VR Injector can automatically check for a newer version at startup, in addition to the manual Help menu check.
+- Updates are downloaded to a temporary staging area and validated before the current installation is touched.
+- The dedicated updater waits for VPX VR Injector to close, safely replaces the portable files, preserves user data, and relaunches the application.
+- A previous-version backup and rollback path are kept so a failed replacement can be restored safely.
+
+#### Version 1.5
+
+- Added **Gemini Artwork Studio** for preparing several artwork slots in one guided session.
+- Reference images are selected once and reused across the selected slots. Cabinet, Backbox and Backglass are selected by default; VR Walls, Floor and Roof remain optional.
+- The Studio is launched from the existing Gemini window instead of adding another button to the main interface.
+- Gemini should remain in the **same conversation** for all selected slots. The current prompt is copied to the clipboard and the prepared image bundle is opened for manual drag-and-drop.
+- Automatic prompt pasting was removed for reliability: the user remains in control of when the prompt is pasted into Gemini.
+- Generated HD images downloaded from Gemini can be imported directly into the correct slot. If a matching `*_Empty` mask exists, it is automatically placed above the imported artwork in the editor.
+- When Gemini is opened from the texture editor, the **currently edited slot is preselected automatically**.
+- Added **inline layer cropping** directly on the texture-editor canvas, with resize/move handles, Apply / Cancel / Reset controls and keyboard validation. The cropped area keeps its visual size and position instead of being resized after validation.
+- Added a **progressive VR plunger animation** for the injected `PinCab_Shooter`, avoiding the instant full-travel effect of earlier experiments.
+- 
 All previous Gemini, Mixed Reality, source-image extraction, Generic preset, DigitGrid, material-injection and texture-editor features remain available.
 
 
@@ -171,6 +197,12 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 - 🧩 **Éditeur de textures** — calques multiples, déplacement, redimensionnement, rotation, miroir, ajustement au clavier et réorganisation
 - 📋 **Coller une image comme nouveau calque — nouveauté 1.1** — utilisez le bouton Coller une image ou `Ctrl+V` pour ajouter directement dans l'éditeur une image présente dans le presse-papiers Windows
 - ✨ **Assistant Gemini depuis l'éditeur — nouveauté 1.1** — ouvre le même workflow multi-images que celui disponible depuis la fenêtre principale
+- 🎨 **Gemini Artwork Studio — nouveauté 1.5** — préparez plusieurs slots d'artwork dans une seule session guidée en réutilisant la même sélection d'images de référence et la même conversation Gemini
+- 🧭 **Cible Gemini contextuelle — nouveauté 1.5** — lorsque Gemini est ouvert depuis l'éditeur de textures, le slot en cours d'édition est automatiquement présélectionné
+- 📋 **Workflow Gemini manuel plus fiable — nouveauté 1.5** — le prompt est copié dans le presse-papiers mais n'est jamais collé automatiquement ; les dossiers d'images préparés sont ouverts pour être glissés-déposés manuellement dans la même conversation Gemini
+- 📥 **Import HD du résultat Gemini — nouveauté 1.5** — importez directement l'image haute résolution téléchargée dans le bon slot ; lorsqu'un masque `*_Empty` correspondant existe, l'éditeur le place automatiquement au-dessus de l'artwork généré
+- ✂️ **Rognage directement dans l'éditeur — nouveauté 1.5** — rognez le calque sélectionné directement sur le canvas tout en conservant la taille et la position visuelles de la zone conservée
+- 🕹️ **Animation progressive du plunger VR — nouveauté 1.5** — le `PinCab_Shooter` injecté suit un mouvement progressif lors du tirage et du relâchement au lieu de passer instantanément à sa course maximale
 - ⇋ **Dupliquer à l'opposé** — crée instantanément une copie miroir positionnée symétriquement pour les side arts du cabinet
 - 🪟 **Fenêtres d'édition améliorées** — boutons Windows natifs réduire / agrandir / restaurer
 - ⧉ **Duplication des calques**
@@ -181,7 +213,7 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 - 🎚️ **Bascule VR/MR en jeu** — le menu F12 de VPX permet de passer de la VR Room standard à la Mixed Reality
 - 🧱 **Injection des matériaux fiabilisée** — correction des matériaux dupliqués / manquants et des objets VR roses
 - 🌐 **Interface bilingue** — Français et Anglais (FR/EN)
-- 🔔 **Vérificateur de mises à jour** — notification lorsqu'une nouvelle version est disponible sur GitHub
+- 🔄 **Mise à jour automatique portable — nouveauté 1.4** — vérifie automatiquement les Releases GitHub, télécharge et valide la mise à jour, remplace l'installation portable de façon sûre, restaure l'ancienne version en cas d'échec puis relance VPX VR Injector
 - 🛡️ **Non-destructif** — la table injectée est sauvegardée séparément et une sauvegarde optionnelle peut être créée
 - 🖥️ **Interface optimisée** — panneau d'options scrollable, bouton Injecter VR toujours visible et zone LOG plus compacte
 - ⚙️ **Exécutable autonome** — aucune installation de Python requise ; téléchargez et lancez directement
@@ -195,7 +227,7 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 3. **Lancez** `VpxVRInjector.exe`
 4. **Sélectionnez** votre fichier `.vpx`
 5. **Choisissez** un VR Pack dans la liste
-6. Réutilisez éventuellement les images intégrées à la table source ou personnalisez-les dans l'éditeur
+6. Réutilisez éventuellement les images intégrées à la table source, personnalisez-les dans l'éditeur, rognez les calques directement sur le canvas ou préparez des artworks avec Gemini / Gemini Artwork Studio
 7. Ouvrez éventuellement **🧹 VR Cleanup** pour masquer les objets de la table source qui ne doivent pas rester visibles en VR.
 8. Utilisez éventuellement l'**Aperçu 3D de la VR Room** pour vérifier le cabinet et la Room avant injection.
 9. **Injectez** — choisissez où enregistrer le fichier `.vpx` généré, puis ouvrez-le dans Visual Pinball X avec le mode VR activé.
@@ -208,7 +240,7 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 
 ---
 
-### 🆕 Nouveautés 1.2 et 1.3
+### 🆕 Nouveautés 1.2 → 1.5
 
 #### Version 1.2
 
@@ -232,6 +264,25 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 - VR Cleanup gère les différents champs de visibilité VPX utilisés notamment par les Ramps, Primitives, Flashers, Flippers, Triggers, Gates, Spinners et autres types pris en charge.
 - **Sauvegarde originale est désormais décochée par défaut**, tout en restant disponible comme option de sécurité.
 
+#### Version 1.4
+
+- Ajout d'un **système de mise à jour automatique portable** basé sur les Releases GitHub.
+- VPX VR Injector peut vérifier automatiquement au démarrage si une nouvelle version existe, en complément de la vérification manuelle du menu Aide.
+- La mise à jour est téléchargée dans une zone temporaire et validée avant toute modification de l'installation actuelle.
+- L'updater dédié attend la fermeture de VPX VR Injector, remplace proprement les fichiers portables, conserve les données utilisateur puis relance l'application.
+- Une sauvegarde de la version précédente et une procédure de rollback permettent de restaurer l'installation en cas d'échec.
+
+#### Version 1.5
+
+- Ajout du **Gemini Artwork Studio** pour préparer plusieurs slots d'artwork dans une seule session guidée.
+- Les images de référence sont sélectionnées une seule fois puis réutilisées pour les slots choisis. Cabinet, Backbox et Backglass sont cochés par défaut ; les murs VR, le sol et le plafond restent optionnels.
+- Le Studio est accessible depuis la fenêtre Gemini existante afin de ne pas ajouter un nouveau bouton dans l'interface principale.
+- Il faut conserver **la même conversation Gemini** pour tous les slots sélectionnés. Le prompt courant est copié dans le presse-papiers et le dossier d'images préparé s'ouvre pour permettre un glisser-déposer manuel.
+- Le collage automatique du prompt a été supprimé pour plus de fiabilité : l'utilisateur choisit lui-même quand le coller dans Gemini.
+- Les images HD téléchargées depuis Gemini peuvent être importées directement dans le bon slot. Si un masque `*_Empty` correspondant existe, il est automatiquement ajouté au-dessus de l'artwork importé dans l'éditeur.
+- Lorsque Gemini est lancé depuis l'éditeur de textures, le **slot actuellement édité est automatiquement présélectionné**.
+- Ajout du **rognage directement sur le canvas** de l'éditeur, avec poignées de déplacement/redimensionnement, Appliquer / Annuler / Reset et validation clavier. La zone conservée garde sa taille et sa position visuelles au lieu d'être redimensionnée après validation.
+- Ajout d'une **animation progressive du plunger VR** pour le `PinCab_Shooter` injecté, afin d'éviter un passage instantané à la course maximale.
 Toutes les fonctions précédentes Gemini, Mixed Reality, extraction d'images, presets Generic, DigitGrid, injection des matériaux et éditeur restent disponibles.
 
 
