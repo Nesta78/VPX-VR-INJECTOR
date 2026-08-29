@@ -8,7 +8,7 @@
 
 **Inject VR Rooms into any Visual Pinball X table — no VR source required.**
 
-[![Version](https://img.shields.io/badge/version-1.2-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
+[![Version](https://img.shields.io/badge/version-1.3-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey?style=flat-square&logo=windows)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 
@@ -39,9 +39,18 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 - 🖼️ **Source table image extraction** — browse artwork embedded in the original VPX and reuse it for the VR cabinet
 - 🔎 **Smart artwork suggestions** — likely backglass, cabinet, blades, speaker, apron and other useful images are highlighted automatically
 - 👁️ **Hover previews** for extracted table images
+- 💾 **Choose the output location — new in 1.2** — select the filename and folder of the generated VR table with a standard Save As dialog
+- 🔄 **Automatic VR Wall orientation — new in 1.2** — Left / Right Wall textures are shown in the natural orientation in the GUI and automatically rotated as required during VPX injection
+- ⚡ **Smoother source-image extraction — new in 1.2** — image decoding and thumbnail generation run in the background so the GUI stays responsive
+- 🧊 **Integrated 3D VR Room Preview — new in 1.3** — inspect the selected pack directly inside VPX VR Injector using the real VPX meshes, UV mapping and currently selected textures
+- 🎥 **Interactive 3D views — new in 1.3** — orbit, zoom and switch between Front / Left / Right / Rear / Top / 3/4 views without launching VPX
+- 🧹 **VR Cleanup — new in 1.3** — inspect source-table objects before injection and make selected objects invisible only in the generated VR table
+- ⚠️ **Rail / Rails cleanup suggestions — new in 1.3** — likely problematic rail objects are automatically shown first and can be selected in one click
 - ✨ **Gemini artwork assistant — new in 1.1** — select several images extracted from the source table, choose a target texture slot, and prepare a slot-specific prompt plus the correct green-mask template for Gemini Web
 - 🧠 **Slot-aware Gemini prompts — new in 1.1** — dedicated instructions for Cabinet, Backbox, Backglass, VR Walls, Floor and Roof, including strict green-mask preservation and cabinet-side orientation rules
 - 📂 **Automatic Gemini bundle — new in 1.1** — creates a temporary folder containing the selected reference images, the matching green template and a text copy of the generated prompt
+- 🪟 **Improved Gemini window — new in 1.2** — native minimize / maximize / restore controls for the Gemini preparation dialog
+- 🎨 **AI / artist reminder — new in 1.2** — the interface reminds users that AI can help create quick artwork, while original work from graphic artists remains the preferred choice whenever available
 - 🧩 **Texture Editor** — multi-layer composition, positioning, scaling, rotation, mirroring, keyboard nudging and layer reordering
 - 📋 **Paste image as a new layer — new in 1.1** — use the Paste Image button or `Ctrl+V` to add an image from the Windows clipboard directly into the editor
 - ✨ **Gemini assistant from the editor — new in 1.1** — launches the same multi-reference Gemini workflow available from the main window
@@ -70,7 +79,11 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 4. **Select** your `.vpx` table file
 5. **Choose** a VR Pack from the list
 6. Optionally reuse images embedded in the source table or customize them in the built-in editor
-7. **Inject** — done! Open the output file in Visual Pinball X with VR mode enabled
+7. Optionally open **🧹 VR Cleanup** to hide source-table objects that should not remain visible in VR.
+8. Optionally open the **3D VR Room Preview** to inspect the cabinet and Room before injection.
+9. **Inject** — choose where to save the generated `.vpx` file, then open it in Visual Pinball X with VR mode enabled.
+
+> **Original backup is disabled by default in 1.3.** Enable it manually if you want VPX VR Injector to create an additional safety copy.
 
 > For **EM tables**, or tables whose score/display is integrated into the backglass, keep a `.directb2s` file in the same folder and rename it so its base filename exactly matches the generated `_VR.vpx` table.
 
@@ -78,26 +91,31 @@ The tool works by directly manipulating the **OLE Compound File** format of `.vp
 
 ---
 
-### 🆕 What's new in 1.1
+### 🆕 What's new in 1.2 and 1.3
 
-Version **1.1** focuses on artwork creation and makes it much easier to build custom VR textures from the artwork already stored inside a VPX table.
+#### Version 1.2
 
-- **Generate artwork with Gemini** is now available directly from the main window.
-- Select **multiple source-table images** and use them together as visual references for Gemini.
-- Choose the target slot before generation: **Cabinet, Backbox, Backglass, VR Wall Left, VR Wall Right, Floor or Roof**, depending on the selected pack and available templates.
-- VPX VR Injector automatically selects the matching **green-mask template** for the current VR pack and target slot.
-- The generated Gemini prompt is **slot-specific**. Cabinet prompts include mirrored side-art rules, 90° side-panel orientation, protected hardware/cutouts and strict instructions to fill every green pixel without painting outside the mask.
-- A dedicated temporary folder is created containing the selected reference images, the correct template and `gemini_prompt.txt`.
-- The prompt is copied to the clipboard and VPX VR Injector opens the temporary folder and Gemini Web. Drag the prepared images into Gemini and paste the prompt to generate the artwork.
-- The workflow uses **Gemini Web**, so VPX VR Injector does not require a Gemini API key, paid API integration or its own AI server.
-- The built-in texture editor can now **paste an image from the clipboard as a new layer** using the Paste Image button or `Ctrl+V` — useful for bringing a Gemini result straight back into the editor.
-- The texture editor now exposes the **same Generate artwork with Gemini assistant** as the main window instead of a separate simplified workflow.
-- Generic X positioning uses a **centered coordinate system**: `X = 0` keeps the cabinet horizontally centered when Width changes.
-- Old School dimensions now display a contextual warning because **Width / Length are proportional adjustments**; very large values can cause very large geometry changes.
+- The generated VR table can now be saved **wherever you want** using a standard **Save As** dialog.
+- **Left / Right Wall orientation is handled automatically**: walls are shown naturally in the GUI/editor and rotated as required only for VPX injection.
+- Source-table image extraction was moved to a **background worker**, keeping the loading animation and interface much smoother.
+- The Gemini preparation window now supports native **minimize / maximize / restore** controls.
+- A short reminder was added to the Gemini workflow: AI is useful for quick artwork creation, but **original artwork from graphic artists remains the preferred choice whenever available**.
+- Special thanks added for **Speedygonzales**, for extensive testing and feedback.
 
-All previous Mixed Reality, source-image extraction, Generic preset, DigitGrid, material-injection and texture-editor features remain available in 1.1.
+#### Version 1.3
 
-> **Gemini workflow note:** generated results still depend on Gemini following the supplied mask instructions. The green templates and prompts are designed to strongly constrain the result, but the final image should always be visually checked before use.
+- Added an integrated **3D VR Room Preview** directly inside VPX VR Injector — no need to launch VPX.
+- The viewer uses the **real VPX meshes, object transforms and UV mapping** from the selected pack, together with the textures currently selected in the GUI.
+- Preview the **Cabinet, Backbox, Backglass, Walls, Floor, Roof and other pack hardware** in one complete 3D scene.
+- Interactive controls include orbit, zoom and preset **Front / Left / Right / Rear / Top / 3/4** views.
+- The 3D viewer uses an **OpenGL depth buffer** for clean surface occlusion and is fully translated in English and French.
+- Added **🧹 VR Cleanup** to inspect source-table objects before injection.
+- Objects containing **Rail / Rails** are highlighted as cleanup suggestions because they are frequent sources of visual conflicts in injected VR Rooms.
+- Search the source object list, select the objects to hide and VPX VR Injector sets their visibility to **False only in the generated VR table**.
+- VR Cleanup supports the different VPX visibility fields used by Ramps, Primitives, Flashers, Flippers, Triggers, Gates, Spinners and other supported object types.
+- **Original backup is now disabled by default**, while remaining available as an optional safety feature.
+
+All previous Gemini, Mixed Reality, source-image extraction, Generic preset, DigitGrid, material-injection and texture-editor features remain available.
 
 
 ### 📦 Included VR Packs
@@ -138,9 +156,18 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 - 🖼️ **Extraction des images de la table source** — réutilisez les artworks intégrés au fichier VPX
 - 🔎 **Suggestions intelligentes d'artworks** — backglass, cabinet, blades, speaker, apron et autres images utiles sont mises en avant
 - 👁️ **Aperçu au survol** des images extraites
+- 💾 **Choix de l'emplacement de sortie — nouveauté 1.2** — choisissez le nom et le dossier de la table VR générée via une boîte Enregistrer sous
+- 🔄 **Orientation automatique des murs VR — nouveauté 1.2** — les murs gauche/droit sont affichés dans le bon sens dans le GUI puis retournés automatiquement comme nécessaire lors de l'injection VPX
+- ⚡ **Extraction des images plus fluide — nouveauté 1.2** — décodage des images et création des miniatures en arrière-plan afin de garder l'interface réactive
+- 🧊 **Aperçu 3D intégré de la VR Room — nouveauté 1.3** — visualisez le pack sélectionné directement dans VPX VR Injector avec les vrais meshes VPX, leurs UV et les textures actuellement choisies
+- 🎥 **Vues 3D interactives — nouveauté 1.3** — rotation libre, zoom et vues Avant / Gauche / Droite / Arrière / Dessus / 3/4 sans lancer VPX
+- 🧹 **VR Cleanup — nouveauté 1.3** — inspectez les objets de la table source avant injection et rendez certains objets invisibles uniquement dans la table VR générée
+- ⚠️ **Suggestions Rail / Rails — nouveauté 1.3** — les objets susceptibles de poser problème en VR sont automatiquement remontés en priorité
 - ✨ **Assistant de génération d'artwork avec Gemini — nouveauté 1.1** — sélectionnez plusieurs images extraites de la table source, choisissez un slot cible et préparez automatiquement un prompt adapté ainsi que le bon template à masque vert pour Gemini Web
 - 🧠 **Prompts Gemini adaptés au slot — nouveauté 1.1** — instructions dédiées pour Cabinet, Backbox, Backglass, murs VR, sol et plafond, avec respect strict du masque vert et règles d'orientation spécifiques au cabinet
 - 📂 **Dossier Gemini automatique — nouveauté 1.1** — création d'un dossier temporaire contenant les images de référence sélectionnées, le template vert correspondant et une copie texte du prompt généré
+- 🪟 **Fenêtre Gemini améliorée — nouveauté 1.2** — contrôles natifs réduire / agrandir / restaurer dans la fenêtre de préparation Gemini
+- 🎨 **Rappel IA / graphistes — nouveauté 1.2** — le logiciel rappelle que l'IA peut aider à créer rapidement un artwork, mais que le travail original des graphistes reste le choix privilégié lorsqu'il est disponible
 - 🧩 **Éditeur de textures** — calques multiples, déplacement, redimensionnement, rotation, miroir, ajustement au clavier et réorganisation
 - 📋 **Coller une image comme nouveau calque — nouveauté 1.1** — utilisez le bouton Coller une image ou `Ctrl+V` pour ajouter directement dans l'éditeur une image présente dans le presse-papiers Windows
 - ✨ **Assistant Gemini depuis l'éditeur — nouveauté 1.1** — ouvre le même workflow multi-images que celui disponible depuis la fenêtre principale
@@ -169,7 +196,11 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 4. **Sélectionnez** votre fichier `.vpx`
 5. **Choisissez** un VR Pack dans la liste
 6. Réutilisez éventuellement les images intégrées à la table source ou personnalisez-les dans l'éditeur
-7. **Injectez** — c'est tout ! Ouvrez le fichier de sortie dans Visual Pinball X avec le mode VR activé
+7. Ouvrez éventuellement **🧹 VR Cleanup** pour masquer les objets de la table source qui ne doivent pas rester visibles en VR.
+8. Utilisez éventuellement l'**Aperçu 3D de la VR Room** pour vérifier le cabinet et la Room avant injection.
+9. **Injectez** — choisissez où enregistrer le fichier `.vpx` généré, puis ouvrez-le dans Visual Pinball X avec le mode VR activé.
+
+> **Sauvegarde originale est désactivée par défaut depuis la 1.3.** Activez-la manuellement si vous souhaitez créer une copie de sécurité supplémentaire.
 
 > Pour les **tables EM**, ou les tables dont le score/l'affichage est intégré au backglass, conservez un fichier `.directb2s` dans le même dossier et renommez-le afin que son nom de base corresponde exactement à celui de la table `_VR.vpx` générée.
 
@@ -177,26 +208,31 @@ L'outil fonctionne en manipulant directement le format **OLE Compound File** des
 
 ---
 
-### 🆕 Nouveautés 1.1
+### 🆕 Nouveautés 1.2 et 1.3
 
-La version **1.1** se concentre sur la création d'artworks et facilite fortement la fabrication de textures VR personnalisées à partir des images déjà présentes dans une table VPX.
+#### Version 1.2
 
-- Le bouton **Générer un artwork avec Gemini** est maintenant disponible directement dans la fenêtre principale.
-- Vous pouvez sélectionner **plusieurs images de la table source** et les utiliser ensemble comme références visuelles dans Gemini.
-- Choisissez le slot à générer : **Cabinet, Backbox, Backglass, Mur VR gauche, Mur VR droit, Sol ou Plafond**, selon le pack sélectionné et les templates disponibles.
-- VPX VR Injector sélectionne automatiquement le **template à masque vert** correspondant au pack VR et au slot cible.
-- Le prompt Gemini est **adapté au slot**. Pour le Cabinet, il intègre notamment les règles de miroir des sides, leur orientation à 90°, la protection des éléments matériels/découpes et des consignes strictes pour remplir tous les pixels verts sans dépasser du masque.
-- Un dossier temporaire dédié est créé avec les images de référence sélectionnées, le bon template et un fichier `gemini_prompt.txt`.
-- Le prompt est copié dans le presse-papiers et VPX VR Injector ouvre le dossier temporaire ainsi que Gemini Web. Il suffit ensuite de glisser les images préparées dans Gemini et de coller le prompt.
-- Le workflow utilise **Gemini Web** : VPX VR Injector n'a donc besoin ni d'une clé API Gemini, ni d'une API payante, ni de son propre serveur IA.
-- L'éditeur de textures permet maintenant de **coller une image du presse-papiers comme nouveau calque** via le bouton Coller une image ou `Ctrl+V` — idéal pour réimporter immédiatement une génération Gemini.
-- L'éditeur utilise désormais le **même assistant Générer un artwork avec Gemini** que la fenêtre principale, au lieu d'un workflow Gemini séparé et simplifié.
-- Le positionnement Generic en X utilise maintenant un **repère centré** : `X = 0` conserve le cabinet centré horizontalement lorsque Width change.
-- Les dimensions du pack Old School affichent désormais un avertissement contextuel : **Width / Length sont des ajustements proportionnels** et des valeurs très élevées peuvent provoquer de très grands changements de géométrie.
+- La table VR générée peut maintenant être enregistrée **où vous le souhaitez** grâce à une boîte **Enregistrer sous**.
+- L'orientation des **murs gauche / droit** est gérée automatiquement : ils sont affichés dans le bon sens dans le GUI/éditeur et retournés uniquement lorsque VPX en a besoin lors de l'injection.
+- L'extraction des images de la table source est maintenant exécutée dans un **worker en arrière-plan**, ce qui rend la barre de chargement et l'interface beaucoup plus fluides.
+- La fenêtre de préparation Gemini possède désormais les contrôles natifs **réduire / agrandir / restaurer**.
+- Un rappel a été ajouté dans le workflow Gemini : l'IA est pratique pour créer rapidement, mais **le travail original des graphistes reste le choix privilégié lorsqu'il est disponible**.
+- Ajout de remerciements spéciaux à **Speedygonzales** pour ses nombreux tests et retours.
 
-Toutes les fonctions précédentes concernant la Mixed Reality, l'extraction d'images, les presets Generic, DigitGrid, l'injection des matériaux et l'éditeur restent disponibles dans la 1.1.
+#### Version 1.3
 
-> **À propos de Gemini :** le résultat final dépend toujours de la façon dont Gemini respecte les consignes du masque. Les templates verts et les prompts sont conçus pour fortement contraindre la génération, mais il reste conseillé de vérifier visuellement l'image avant de l'utiliser.
+- Ajout d'un **Aperçu 3D intégré de la VR Room** directement dans VPX VR Injector, sans lancer VPX.
+- Le viewer utilise les **vrais meshes VPX, transformations d'objets et coordonnées UV** du pack sélectionné, avec les textures actuellement choisies dans le GUI.
+- Visualisation du **Cabinet, Backbox, Backglass, murs, sol, plafond et autres éléments matériels du pack** dans une scène 3D complète.
+- Contrôles interactifs : rotation libre, zoom et vues **Avant / Gauche / Droite / Arrière / Dessus / 3/4**.
+- Le viewer 3D utilise un **depth buffer OpenGL** pour une occultation propre des surfaces et possède une interface entièrement traduite FR/EN.
+- Ajout de **🧹 VR Cleanup** pour inspecter les objets de la table source avant injection.
+- Les objets contenant **Rail / Rails** sont mis en avant comme suggestions, car ils provoquent fréquemment des conflits visuels dans les VR Rooms injectées.
+- Recherche dans la liste, sélection des objets à masquer, puis passage de leur visibilité à **False uniquement dans la table VR générée**.
+- VR Cleanup gère les différents champs de visibilité VPX utilisés notamment par les Ramps, Primitives, Flashers, Flippers, Triggers, Gates, Spinners et autres types pris en charge.
+- **Sauvegarde originale est désormais décochée par défaut**, tout en restant disponible comme option de sécurité.
+
+Toutes les fonctions précédentes Gemini, Mixed Reality, extraction d'images, presets Generic, DigitGrid, injection des matériaux et éditeur restent disponibles.
 
 
 ### 📦 VR Packs inclus
@@ -218,7 +254,7 @@ Toutes les fonctions précédentes concernant la Mixed Reality, l'extraction d'i
 
 <div align="center">
 
-Made with ❤️ for the VPX VR pinball cabinet community - Thank you to Sixtoe & Dardog vor VR Rooms ressources :)
+Made with ❤️ for the VPX VR pinball cabinet community — thank you to **Sixtoe & Dardog** for the VR Room resources, and special thanks to **Speedygonzales** for extensive testing and feedback.
 
 [⬆ Back to top](#vpx-vr-injector)
 
