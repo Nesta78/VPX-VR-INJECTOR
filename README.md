@@ -254,7 +254,7 @@ Toutes les fonctions précédentes Gemini, Mixed Reality, extraction d'images, p
 
 <div align="center">
 
-Made with ❤️ for the VPX VR pinball cabinet community — thank you to **Sixtoe & Dardog** for the VR Room resources, and special thanks to **Speedygonzales** for extensive testing and feedback.
+Made with ❤️ for the VPX VR Pinball community — thank you to **Sixtoe & Dardog** for the VR Room resources, and special thanks to **Speedygonzales** for extensive testing and feedback.
 
 [⬆ Back to top](#vpx-vr-injector)
 
