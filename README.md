@@ -1,5 +1,3 @@
-<img width="1118" height="779" alt="image" src="https://github.com/user-attachments/assets/30a3cb72-edab-4cc0-9877-80ca84b77f21" /><div align="center">
-
 <img width="200" height="200" alt="icon" src="https://github.com/user-attachments/assets/e2707416-3ea2-47e2-9a3d-a18011f054c0" />
 
 # VPX VR Injector
