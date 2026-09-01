@@ -1,4 +1,4 @@
-<div align="center">
+<img width="1118" height="779" alt="image" src="https://github.com/user-attachments/assets/30a3cb72-edab-4cc0-9877-80ca84b77f21" /><div align="center">
 
 <img width="200" height="200" alt="icon" src="https://github.com/user-attachments/assets/e2707416-3ea2-47e2-9a3d-a18011f054c0" />
 
@@ -358,7 +358,7 @@ La liste est chargée dynamiquement depuis `packs/`. Elle comprend actuellement 
 
 <div align="center">
 
-Made with ❤️ for the VPX VR Pinball community — thank you to **Sixtoe & Dardog** for the VR Room resources, and special thanks to **Speedygonzales** for extensive testing and feedback.
+Made with ❤️ for the VPX VR Pinball community — thank you to **Sixtoe & Dardog** for the VR Room resources, to **JoePicasso** for Rawd Poster, and special thanks to **Speedygonzales** for extensive testing and feedback.
 
 [⬆ Back to top](#vpx-vr-injector)
 
