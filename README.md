@@ -10,7 +10,9 @@
 
 </div>
 
-<div align="center">📘 [Documentation / Wiki](https://github.com/Nesta78/VPX-VR-INJECTOR/wiki)</div>
+<p align="center">
+  📘 <a href="https://github.com/Nesta78/VPX-VR-INJECTOR/wiki"><strong>Documentation / Wiki</strong></a>
+</p>
 
 ---
 
