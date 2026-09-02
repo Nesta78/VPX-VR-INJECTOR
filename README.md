@@ -428,7 +428,7 @@ La liste est chargée dynamiquement depuis `packs/`. Elle comprend actuellement 
 
 <div align="center">
 
-Made with ❤️ for the VPX VR Pinball community — thank you to **Sixtoe & Dardog** for the VR Room resources, to **JoePicasso** for Rawd Poster, and special thanks to **Speedygonzales** for extensive testing and feedback.
+Made with ❤️ for the VPX VR Pinball community — thank you to **Sixtoe & Dardog** for the VR Room resources, to **JoePicasso** for Rawd Poster, to **all VPS Database contributors**, and special thanks to **Speedygonzales** for extensive testing and feedback.
 
 [⬆ Back to top](#vpx-vr-injector)
 
