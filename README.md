@@ -4,7 +4,7 @@
 
 **Inject VR Rooms into any Visual Pinball X table — no VR source required.**
 
-[![Version](https://img.shields.io/badge/version-2.4-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
+[![Version](https://img.shields.io/badge/version-2.5-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey?style=flat-square&logo=windows)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 
@@ -53,8 +53,11 @@ VPX VR Injector directly edits VPX OLE Compound File data and injects the requir
 - 🖼️ **Built-in poster library** for Deluxe Poster 1 / Poster 2
 - ✨ **AI Artwork Assistant / Studio** for Gemini and ChatGPT web workflows
 - 🧊 **Integrated 3D Preview** using real VPX meshes, UV mapping and current custom settings
-- 🧹 **VR Cleanup** to hide selected source-table objects only in the generated VR table
-- ⚠️ **Combined source-table warning** for existing VR objects and possible Rail/Rails conflicts, with direct access to VR Cleanup
+- 🧹 **Smart VR Cleanup** with priority detection for Rail/Rails, Lockbar and likely side-rail geometry
+- ⚠️ **Combined source-table warning** for existing VR objects and possible cabinet conflicts, with direct access to VR Cleanup
+- 🌐 **VPS integration** to detect existing dedicated VR releases before injection
+- 🖼️ **VPS VR release browser** with thumbnails, release details and individual links
+- 📦 **Recommended Cabinet Pack** suggestion based on matched VPS table metadata
 - 🔢 **DigitGrid / Flasher DMD detection and repositioning**
 - 🌐 **Optional Mixed Reality 360° sphere**
 - 🎚️ **F12 VR Room / Mixed Reality switch**
@@ -120,14 +123,46 @@ Keep all values at `0` when the automatic placement is correct. DMD Custom value
 
 ### 🧹 VR Cleanup and automatic source-table detection
 
-When a source table is loaded, VPX VR Injector can detect:
+When a source table is loaded, VPX VR Injector can identify several possible conflicts:
 
 - objects that appear to belong to an existing VR setup
-- potentially conflicting objects whose names contain **Rail** or **Rails**
+- names containing **Rail / Rails / SideRail**
+- names containing **Lockbar / Lock Bar**
+- likely side rails detected from geometry on compatible **Primitive, Ramp or Flasher** objects
 
-If one or both categories are detected, a single warning summarizes the result and offers to open **VR Cleanup**.
+Name-based Rail/Lockbar matches are treated as strong candidates. Geometric rail detection is intentionally more cautious: it only prioritizes long, thin objects located near the sides of the playfield and never hides them automatically.
 
-VR Cleanup lists source GameItems and lets you mark supported objects as **Hide in VR**. The source file is not modified; the visibility change is applied only to the generated VR table.
+If one or more categories are detected, a single warning summarizes the result and offers to open **VR Cleanup**.
+
+VR Cleanup lists source GameItems and lets you mark supported objects as **Hide in VR**. The source table is never modified; visibility changes are applied only to the generated VR table.
+
+### 🌐 VPS integration
+
+VPX VR Injector can use the public **Virtual Pinball Spreadsheet (VPS)** database when a source table is loaded.
+
+When a confident VPS match is found, the application can:
+
+- check whether one or more dedicated **VR releases** already exist
+- display all matching VR releases in a dedicated resizable/maximizable window
+- show a thumbnail, release version, authors and important VPS features
+- enlarge table thumbnails on hover
+- provide an individual **Open release** button for every VR version
+- suggest the closest available **Cabinet Pack** based on the matched manufacturer/year metadata
+
+Cabinet Pack recommendations are suggestions only and are never applied automatically.
+
+For generations without an exact VRI pack, the application can suggest the closest available equivalent (for example, Williams System 11 tables can be offered **WPC Williams** as the closest available match).
+
+Both VPS features can be enabled or disabled separately in **Settings > VPS**:
+
+- **Check VPS for existing VR versions**
+- **Suggest a Cabinet Pack from VPS metadata**
+
+Both are enabled by default.
+
+To keep the application responsive, VPS data is cached locally. The full VPS database is not rescanned for every table: VPX VR Injector builds a compact local index, keeps it in memory for the current session and refreshes the VPS timestamp only periodically. Release thumbnails are cached as well.
+
+VPS access is non-blocking: if the database or network is unavailable, normal VPX VR Injector usage continues.
 
 ### ✨ AI Artwork Assistant / Studio
 
@@ -147,16 +182,16 @@ It supports source-table references, external references, multi-slot workflows, 
 3. Choose a **Cabinet Pack**.
 4. Choose a **Room Style**.
 5. Load a `.vpx` source table.
-6. Keep **Auto dimensions** enabled for the first test.
-7. Adjust Generic / DMD Custom values only if needed.
-8. Choose the cabinet **button color** if desired.
-9. Customize artwork.
-10. Check the result in the **3D Preview**.
-11. Use **VR Cleanup** if the source-table warning suggests it or if geometry conflicts are visible.
-12. Optionally enable the **Mixed Reality sphere**.
-13. Click **Inject VR** and choose the destination.
-14. Optionally let VPX VR Injector launch the generated table automatically.
-
+6. Review any VPS VR-release results / Cabinet Pack suggestion if displayed.
+7. Keep **Auto dimensions** enabled for the first test.
+8. Adjust Generic / DMD Custom values only if needed.
+9. Choose the cabinet **button color** if desired.
+10. Customize artwork.
+11. Check the result in the **3D Preview**.
+12. Use **VR Cleanup** if the source-table warning suggests it or if geometry conflicts are visible.
+13. Optionally enable the **Mixed Reality sphere**.
+14. Click **Inject VR** and choose the destination.
+15. Optionally let VPX VR Injector launch the generated table automatically.
 Suggested output filename:
 
 ```text
@@ -223,8 +258,11 @@ VPX VR Injector modifie directement les données OLE Compound File de VPX et inj
 - 🖼️ **Bibliothèque de posters intégrée** pour Poster 1 / Poster 2 en Deluxe
 - ✨ **AI Artwork Assistant / Studio** pour Gemini et ChatGPT
 - 🧊 **Aperçu 3D intégré** utilisant les vrais meshes/UV VPX et les réglages courants
-- 🧹 **VR Cleanup**
-- ⚠️ **Alerte combinée** si des objets VR existants et/ou des objets Rail/Rails sont détectés, avec ouverture directe de VR Cleanup
+- 🧹 **VR Cleanup intelligent** avec priorité aux Rail/Rails, Lockbar et géométries ressemblant à des rails latéraux
+- ⚠️ **Alerte combinée** en cas d'objets VR existants ou de conflits potentiels, avec ouverture directe de VR Cleanup
+- 🌐 **Intégration VPS** pour détecter les versions VR dédiées déjà disponibles avant injection
+- 🖼️ **Navigateur de releases VR VPS** avec miniatures, informations et liens individuels
+- 📦 **Suggestion de Cabinet Pack** à partir des métadonnées de la table identifiée sur VPS
 - 🔢 **Détection et repositionnement des DMD DigitGrid / Flashers**
 - 🌐 **Sphère 360° Mixed Reality optionnelle**
 - 🎚️ **Bascule VR Room / Mixed Reality via F12**
@@ -290,14 +328,46 @@ Laissez toutes les valeurs à `0` si le placement automatique est correct. Les v
 
 ### 🧹 VR Cleanup et détection automatique
 
-Au chargement d'une table source, VPX VR Injector peut détecter :
+Au chargement d'une table source, VPX VR Injector peut identifier plusieurs conflits potentiels :
 
-- des objets semblant appartenir à une ancienne configuration VR
-- des objets potentiellement gênants dont le nom contient **Rail** ou **Rails**
+- objets semblant appartenir à une ancienne configuration VR
+- noms contenant **Rail / Rails / SideRail**
+- noms contenant **Lockbar / Lock Bar**
+- rails latéraux probables détectés par leur géométrie sur certains objets **Primitive, Ramp ou Flasher**
 
-Si une ou deux catégories sont trouvées, une seule alerte récapitule la détection et propose d'ouvrir **VR Cleanup**.
+Les correspondances Rail/Lockbar par nom sont considérées comme des candidats forts. La détection géométrique reste volontairement prudente : elle se contente de remonter en priorité les objets longs, fins et proches des côtés du playfield, sans jamais les masquer automatiquement.
 
-VR Cleanup liste les GameItems et permet de sélectionner les objets à **Masquer en VR**. La table source n'est pas modifiée : le masquage est appliqué uniquement à la nouvelle table VR.
+Si une ou plusieurs catégories sont détectées, une seule alerte récapitule le résultat et propose d'ouvrir **VR Cleanup**.
+
+VR Cleanup liste les GameItems source et permet de sélectionner les objets à **Masquer en VR**. La table source n'est jamais modifiée : le masquage s'applique uniquement à la table VR générée.
+
+### 🌐 Intégration VPS
+
+VPX VR Injector peut utiliser la base publique **Virtual Pinball Spreadsheet (VPS)** lorsqu'une table source est chargée.
+
+Lorsqu'une correspondance VPS suffisamment fiable est trouvée, le logiciel peut :
+
+- vérifier si une ou plusieurs **releases VR dédiées** existent déjà
+- afficher toutes les versions VR correspondantes dans une fenêtre dédiée redimensionnable et maximisable
+- afficher une miniature, la version, les auteurs et les principales features VPS
+- agrandir les miniatures au survol
+- proposer un bouton **Open release** individuel pour chaque version VR
+- suggérer le **Cabinet Pack** disponible le plus adapté à partir du fabricant et de l'année identifiés
+
+La recommandation de Cabinet Pack reste toujours une suggestion et n'est jamais appliquée automatiquement.
+
+Pour les générations ne disposant pas d'un pack VRI exact, le logiciel peut proposer le meilleur équivalent disponible (par exemple une table Williams System 11 peut recevoir **WPC Williams** comme suggestion la plus proche).
+
+Les deux fonctions VPS peuvent être activées ou désactivées séparément dans **Paramètres > VPS** :
+
+- **Check VPS for existing VR versions**
+- **Suggest a Cabinet Pack from VPS metadata**
+
+Elles sont activées par défaut.
+
+Pour éviter les ralentissements, les données VPS sont mises en cache localement. La base complète n'est pas reparcourue à chaque table : VPX VR Injector construit un index compact, le conserve en mémoire pendant la session et ne vérifie le timestamp VPS que périodiquement. Les miniatures de releases sont également mises en cache.
+
+L'accès VPS n'est pas bloquant : si la base ou Internet est indisponible, le fonctionnement normal de VPX VR Injector continue.
 
 ### ✨ AI Artwork Assistant / Studio
 
@@ -317,16 +387,16 @@ Les références source/externes, les workflows multi-slots, les masques `*_Empt
 3. Choisissez un **Cabinet Pack**.
 4. Choisissez une **Room Style**.
 5. Chargez la table `.vpx` source.
-6. Gardez **Dimensions auto** activé pour le premier essai.
-7. Ajustez les valeurs Generic / DMD Custom uniquement si nécessaire.
-8. Choisissez éventuellement la **couleur des boutons**.
-9. Personnalisez les artworks.
-10. Vérifiez le résultat dans l'**Aperçu 3D**.
-11. Utilisez **VR Cleanup** si l'alerte le suggère ou si des objets se superposent.
-12. Activez éventuellement la **sphère Mixed Reality**.
-13. Cliquez sur **Injecter VR** et choisissez la destination.
-14. Activez éventuellement le lancement automatique de la table générée.
-
+6. Consultez les éventuels résultats VPS / la suggestion de Cabinet Pack.
+7. Gardez **Dimensions auto** activé pour le premier essai.
+8. Ajustez les valeurs Generic / DMD Custom uniquement si nécessaire.
+9. Choisissez éventuellement la **couleur des boutons**.
+10. Personnalisez les artworks.
+11. Vérifiez le résultat dans l'**Aperçu 3D**.
+12. Utilisez **VR Cleanup** si l'alerte le suggère ou si des objets se superposent.
+13. Activez éventuellement la **sphère Mixed Reality**.
+14. Cliquez sur **Injecter VR** et choisissez la destination.
+15. Activez éventuellement le lancement automatique de la table générée.
 Nom suggéré :
 
 ```text
