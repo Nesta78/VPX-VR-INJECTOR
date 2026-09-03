@@ -4,7 +4,7 @@
 
 **Inject VR Rooms into any Visual Pinball X table — no VR source required.**
 
-[![Version](https://img.shields.io/badge/version-2.5-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
+[![Version](https://img.shields.io/badge/version-2.6-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey?style=flat-square&logo=windows)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 
@@ -35,7 +35,7 @@ VPX VR Injector directly edits VPX OLE Compound File data and injects the requir
 
 - 🎮 **One-click VR injection** into existing `.vpx` tables
 - 📦 **Multiple Cabinet Packs** for different cabinet eras and styles
-- 🏠 **Independent Room Style selection**: Standard or Deluxe
+- 🏠 **Independent Room Style selection**: Standard, Deluxe or Ultra Minimal
 - ⚡ **Automatic cabinet dimensions** based on the source playfield
 - 🎛️ **Generic Width / Length / X / Y / Z adjustments**
 - 🔢 **DMD Custom X / Y / Depth / Width / Height fine adjustments**
@@ -44,7 +44,8 @@ VPX VR Injector directly edits VPX OLE Compound File data and injects the requir
 - 🕹️ **Animated cabinet flipper buttons**: the center moves while the ring stays fixed
 - 🕹️ **Progressive VR plunger animation**
 - 🖼️ **Source-table image extraction** with suggestions and previews
-- 🧩 **Built-in multi-layer texture editor**
+- 🧩 **Built-in multi-layer texture editor** with layer visibility toggle
+- 🖥️ **Responsive interface** with more compact controls for smaller screens
 - ✂️ **Inline Crop tool** that preserves visible size and position
 - ⇋ **Duplicate to opposite side** for symmetric artwork
 - 📋 **Paste image from clipboard**
@@ -53,7 +54,7 @@ VPX VR Injector directly edits VPX OLE Compound File data and injects the requir
 - 🖼️ **Built-in poster library** for Deluxe Poster 1 / Poster 2
 - ✨ **AI Artwork Assistant / Studio** for Gemini and ChatGPT web workflows
 - 🧊 **Integrated 3D Preview** using real VPX meshes, UV mapping and current custom settings
-- 🧹 **Smart VR Cleanup** with priority detection for Rail/Rails, Lockbar and likely side-rail geometry
+- 🧹 **Smart VR Cleanup** with suggested items automatically grouped first, plus Rail/Rails, Lockbar, Lockdownbar and likely side-rail detection
 - ⚠️ **Combined source-table warning** for existing VR objects and possible cabinet conflicts, with direct access to VR Cleanup
 - 🌐 **VPS integration** to detect existing dedicated VR releases before injection
 - 🖼️ **VPS VR release browser** with thumbnails, release details and individual links
@@ -67,6 +68,7 @@ VPX VR Injector directly edits VPX OLE Compound File data and injects the requir
 - 🌗 **Dark / Light themes**
 - 🌐 **English / French interface**
 - 🎓 **Quick Tour and Complete Tutorial**
+- 🧱 **Corrected WPC cabinet materials** to avoid missing-material magenta/pink rendering
 - ⚙️ **Standalone Windows executable**
 
 ### 🏠 Room Styles
@@ -99,6 +101,21 @@ You can still customize:
 
 Poster slots include their own built-in poster library.
 
+#### Ultra Minimal
+
+**Ultra Minimal** is a cabinet-only Room Style designed for the lightest possible VR setup.
+
+It injects:
+
+- the selected Cabinet Pack
+- backbox / backglass / DMD elements
+- cabinet artwork
+- animated flipper buttons and plunger
+
+It does **not** inject Room geometry such as walls, floor, roof or Deluxe posters.
+
+The 3D Preview uses a black background to represent the empty environment.
+
 ### 🎨 Cabinet button customization
 
 The **BUTTONS CUSTOM** section lets you choose one color for the complete left and right flipper buttons, including the fixed rings and moving centers.
@@ -127,14 +144,14 @@ When a source table is loaded, VPX VR Injector can identify several possible con
 
 - objects that appear to belong to an existing VR setup
 - names containing **Rail / Rails / SideRail**
-- names containing **Lockbar / Lock Bar**
+- names containing **Lockbar / Lock Bar / Lockdownbar / Lockdown Bar**
 - likely side rails detected from geometry on compatible **Primitive, Ramp or Flasher** objects
 
-Name-based Rail/Lockbar matches are treated as strong candidates. Geometric rail detection is intentionally more cautious: it only prioritizes long, thin objects located near the sides of the playfield and never hides them automatically.
+Name-based Rail/Lockbar/Lockdownbar matches are treated as strong candidates. Geometric rail detection is intentionally more cautious: it only prioritizes long, thin objects located near the sides of the playfield and never hides them automatically.
 
 If one or more categories are detected, a single warning summarizes the result and offers to open **VR Cleanup**.
 
-VR Cleanup lists source GameItems and lets you mark supported objects as **Hide in VR**. The source table is never modified; visibility changes are applied only to the generated VR table.
+VR Cleanup lists source GameItems and automatically groups all suggested candidates at the top of the list. You can then mark supported objects as **Hide in VR**. The source table is never modified; visibility changes are applied only to the generated VR table.
 
 ### 🌐 VPS integration
 
@@ -180,7 +197,7 @@ It supports source-table references, external references, multi-slot workflows, 
 1. Download and extract the latest release.
 2. Run `VpxVRInjector.exe`.
 3. Choose a **Cabinet Pack**.
-4. Choose a **Room Style**.
+4. Choose a **Room Style**: Standard, Deluxe or Ultra Minimal.
 5. Load a `.vpx` source table.
 6. Review any VPS VR-release results / Cabinet Pack suggestion if displayed.
 7. Keep **Auto dimensions** enabled for the first test.
@@ -240,7 +257,7 @@ VPX VR Injector modifie directement les données OLE Compound File de VPX et inj
 
 - 🎮 **Injection VR en un clic**
 - 📦 **Plusieurs Cabinet Packs**
-- 🏠 **Room Style indépendante** : Standard ou Deluxe
+- 🏠 **Room Style indépendante** : Standard, Deluxe ou Ultra Minimal
 - ⚡ **Dimensions automatiques** selon le playfield source
 - 🎛️ **Réglages Generic Width / Length / X / Y / Z**
 - 🔢 **Réglages DMD Custom X / Y / Depth / Width / Height**
@@ -249,7 +266,8 @@ VPX VR Injector modifie directement les données OLE Compound File de VPX et inj
 - 🕹️ **Boutons de flipper animés** : seul le poussoir central s'enfonce, la bague reste fixe
 - 🕹️ **Animation progressive du plunger VR**
 - 🖼️ **Extraction des images de la table source**
-- 🧩 **Éditeur de textures multi-calques**
+- 🧩 **Éditeur de textures multi-calques** avec contrôle de visibilité des calques
+- 🖥️ **Interface responsive** avec contrôles plus compacts pour les écrans moins grands
 - ✂️ **Rognage directement dans l'éditeur**
 - ⇋ **Dupliquer à l'opposé**
 - 📋 **Coller une image depuis le presse-papiers**
@@ -258,7 +276,7 @@ VPX VR Injector modifie directement les données OLE Compound File de VPX et inj
 - 🖼️ **Bibliothèque de posters intégrée** pour Poster 1 / Poster 2 en Deluxe
 - ✨ **AI Artwork Assistant / Studio** pour Gemini et ChatGPT
 - 🧊 **Aperçu 3D intégré** utilisant les vrais meshes/UV VPX et les réglages courants
-- 🧹 **VR Cleanup intelligent** avec priorité aux Rail/Rails, Lockbar et géométries ressemblant à des rails latéraux
+- 🧹 **VR Cleanup intelligent** avec éléments suggérés automatiquement regroupés en premier, détection Rail/Rails, Lockbar, Lockdownbar et rails latéraux probables
 - ⚠️ **Alerte combinée** en cas d'objets VR existants ou de conflits potentiels, avec ouverture directe de VR Cleanup
 - 🌐 **Intégration VPS** pour détecter les versions VR dédiées déjà disponibles avant injection
 - 🖼️ **Navigateur de releases VR VPS** avec miniatures, informations et liens individuels
@@ -272,6 +290,7 @@ VPX VR Injector modifie directement les données OLE Compound File de VPX et inj
 - 🌗 **Thèmes sombre / clair**
 - 🌐 **Interface Français / Anglais**
 - 🎓 **Tour rapide et Tutoriel complet**
+- 🧱 **Matériaux WPC corrigés** pour éviter les éléments roses/magenta dus aux matériaux manquants
 - ⚙️ **Exécutable Windows autonome**
 
 ### 🏠 Room Styles
@@ -304,6 +323,21 @@ Vous pouvez toujours personnaliser :
 
 Les posters disposent de leur propre bibliothèque intégrée.
 
+#### Ultra Minimal
+
+**Ultra Minimal** est une Room Style « cabinet only » conçue pour obtenir l'environnement VR le plus léger possible.
+
+Elle injecte :
+
+- le Cabinet Pack sélectionné
+- les éléments backbox / backglass / DMD
+- les artworks du cabinet
+- les boutons de flipper animés et le plunger
+
+Elle n'injecte **aucune géométrie de Room** : ni murs, ni sol, ni plafond, ni posters Deluxe.
+
+L'Aperçu 3D utilise simplement un fond noir pour représenter l'environnement vide.
+
 ### 🎨 Personnalisation des boutons du pincab
 
 La section **BUTTONS CUSTOM** permet de choisir une seule couleur appliquée aux deux boutons complets : bague fixe + poussoir central.
@@ -332,14 +366,14 @@ Au chargement d'une table source, VPX VR Injector peut identifier plusieurs conf
 
 - objets semblant appartenir à une ancienne configuration VR
 - noms contenant **Rail / Rails / SideRail**
-- noms contenant **Lockbar / Lock Bar**
+- noms contenant **Lockbar / Lock Bar / Lockdownbar / Lockdown Bar**
 - rails latéraux probables détectés par leur géométrie sur certains objets **Primitive, Ramp ou Flasher**
 
-Les correspondances Rail/Lockbar par nom sont considérées comme des candidats forts. La détection géométrique reste volontairement prudente : elle se contente de remonter en priorité les objets longs, fins et proches des côtés du playfield, sans jamais les masquer automatiquement.
+Les correspondances Rail/Lockbar/Lockdownbar par nom sont considérées comme des candidats forts. La détection géométrique reste volontairement prudente : elle se contente de remonter en priorité les objets longs, fins et proches des côtés du playfield, sans jamais les masquer automatiquement.
 
 Si une ou plusieurs catégories sont détectées, une seule alerte récapitule le résultat et propose d'ouvrir **VR Cleanup**.
 
-VR Cleanup liste les GameItems source et permet de sélectionner les objets à **Masquer en VR**. La table source n'est jamais modifiée : le masquage s'applique uniquement à la table VR générée.
+VR Cleanup liste les GameItems source et regroupe automatiquement tous les éléments suggérés en haut de la liste. Vous pouvez ensuite sélectionner les objets à **Masquer en VR**. La table source n'est jamais modifiée : le masquage s'applique uniquement à la table VR générée.
 
 ### 🌐 Intégration VPS
 
@@ -385,7 +419,7 @@ Les références source/externes, les workflows multi-slots, les masques `*_Empt
 1. Téléchargez et extrayez la dernière release.
 2. Lancez `VpxVRInjector.exe`.
 3. Choisissez un **Cabinet Pack**.
-4. Choisissez une **Room Style**.
+4. Choisissez une **Room Style** : Standard, Deluxe ou Ultra Minimal.
 5. Chargez la table `.vpx` source.
 6. Consultez les éventuels résultats VPS / la suggestion de Cabinet Pack.
 7. Gardez **Dimensions auto** activé pour le premier essai.
