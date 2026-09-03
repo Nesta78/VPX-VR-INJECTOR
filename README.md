@@ -4,7 +4,7 @@
 
 **Inject VR Rooms into any Visual Pinball X table — no VR source required.**
 
-[![Version](https://img.shields.io/badge/version-2.7-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
+[![Version](https://img.shields.io/badge/version-2.8-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey?style=flat-square&logo=windows)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 
@@ -31,11 +31,15 @@ Load a source table, choose the cabinet and Room Style, adjust dimensions and DM
 
 VPX VR Injector directly edits VPX OLE Compound File data and injects the required 3D objects, textures, materials and VBScript while preserving the source table.
 
+VPX VR Injector also provides an **experimental Hybrid mode**. A Hybrid table keeps the original 2D/Desktop behavior and adds one or more VR environments that are enabled automatically when VPX runs in VR.
+
 ### ✨ Main features
 
 - 🎮 **One-click VR injection** into existing `.vpx` tables
 - 📦 **Multiple Cabinet Packs** for different cabinet eras and styles
 - 🏠 **Independent Room Style selection**: Standard, Deluxe or Ultra Minimal
+- 🧪 **Experimental Hybrid mode** preserving the original 2D/Desktop table while adding selectable VR Rooms
+- 🏠 **Multiple Rooms in one Hybrid table**: Standard, Deluxe and Ultra Minimal, switchable from F12
 - ⚡ **Automatic cabinet dimensions** based on the source playfield
 - 🎛️ **Generic Width / Length / X / Y / Z adjustments**
 - 🔢 **DMD Custom X / Y / Depth / Width / Height fine adjustments**
@@ -50,6 +54,8 @@ VPX VR Injector directly edits VPX OLE Compound File data and injects the requir
 - ⇋ **Duplicate to opposite side** for symmetric artwork
 - 📋 **Paste image from clipboard**
 - 🎭 **Automatic `*_Empty` mask workflow**
+- 🗂️ **Hybrid artwork management** with separate Cabinet / Standard / Deluxe customization states
+- 💾 **Hybrid artwork presets** that retain Room artwork even when a Room is temporarily disabled
 - 🧱 **Built-in Texture Library** for Standard Room walls, floor and roof
 - 🖼️ **Built-in poster library** for Deluxe Poster 1 / Poster 2
 - ✨ **AI Artwork Assistant / Studio** for Gemini and ChatGPT web workflows
@@ -116,6 +122,46 @@ It does **not** inject Room geometry such as walls, floor, roof or Deluxe poster
 
 The 3D Preview uses a black background to represent the empty environment.
 
+### 🧪 Experimental Hybrid mode
+
+Hybrid mode is designed to keep a table usable in both **2D/Desktop/Cabinet** and **VR** from the same generated `.vpx` file.
+
+In 2D/Desktop mode:
+
+- the source table keeps its original appearance and behavior
+- the original Desktop / Backdrop image is preserved
+- source rails, lockbars and other VR Cleanup objects keep their normal source visibility
+- injected VR Room geometry remains hidden
+
+When VPX runs in VR (`RenderingMode = 2`):
+
+- the injected cabinet is enabled
+- the selected VR environment is enabled
+- VR Cleanup visibility rules are applied only in VR
+- Hybrid DigitGrid support uses a VR-positioned display while preserving the original 2D layout
+
+A Hybrid table can include:
+
+- **Standard**
+- **Deluxe**
+- **Ultra Minimal**
+- **Mixed Reality**, when the optional MR sphere is enabled
+
+If Deluxe is included, it is used as the default VR Room. The injected Rooms can then be changed from **F12**.
+
+> **Hybrid mode is experimental.** Keep the original source table and test the generated table in both 2D/Desktop and VR before replacing an existing setup.
+
+#### Hybrid artwork customization
+
+Hybrid artwork is organized by context:
+
+- **Cabinet** — shared cabinet/backbox/backglass artwork used by every injected Room
+- **Standard** — Left Wall, Right Wall, Floor and Roof
+- **Deluxe** — Poster 1 and Poster 2
+- **Ultra Minimal** — no Room-specific artwork
+
+Disabling a Room does not erase its current artwork. Hybrid presets can store and restore Cabinet, Standard and Deluxe artwork together, including artwork belonging to a Room that is temporarily disabled.
+
 ### 🎨 Cabinet button customization
 
 The **BUTTONS CUSTOM** section lets you choose one color for the complete left and right flipper buttons, including the fixed rings and moving centers.
@@ -151,7 +197,7 @@ Name-based Rail/Lockbar/Lockdownbar matches are treated as strong candidates. Ge
 
 If one or more categories are detected, a single warning summarizes the result and offers to open **VR Cleanup**.
 
-VR Cleanup lists source GameItems and automatically groups all suggested candidates at the top of the list. You can then mark supported objects as **Hide in VR**. The source table is never modified; visibility changes are applied only to the generated VR table.
+VR Cleanup lists source GameItems and automatically groups all suggested candidates at the top of the list. You can then mark supported objects as **Hide in VR**. The source table is never modified. In a normal VR-only injection, the generated VR table receives the requested visibility changes; in **Hybrid mode**, those objects are forced hidden only while VPX is running in VR, so the original 2D/Desktop appearance is preserved.
 
 ### 🌐 VPS integration
 
@@ -197,18 +243,19 @@ It supports source-table references, external references, multi-slot workflows, 
 1. Download and extract the latest release.
 2. Run `VpxVRInjector.exe`.
 3. Choose a **Cabinet Pack**.
-4. Choose a **Room Style**: Standard, Deluxe or Ultra Minimal.
-5. Load a `.vpx` source table.
-6. Review any VPS VR-release results / Cabinet Pack suggestion if displayed.
-7. Keep **Auto dimensions** enabled for the first test.
-8. Adjust Generic / DMD Custom values only if needed.
-9. Choose the cabinet **button color** if desired.
-10. Customize artwork.
-11. Check the result in the **3D Preview**.
-12. Use **VR Cleanup** if the source-table warning suggests it or if geometry conflicts are visible.
-13. Optionally enable the **Mixed Reality sphere**.
-14. Click **Inject VR** and choose the destination.
-15. Optionally let VPX VR Injector launch the generated table automatically.
+4. Choose the injection mode: **VR only** or **Hybrid (experimental)**.
+5. For VR-only, choose a **Room Style**. For Hybrid, choose the VR Rooms to include and customize Cabinet / Standard / Deluxe as needed.
+6. Load a `.vpx` source table.
+7. Review any VPS VR-release results / Cabinet Pack suggestion if displayed.
+8. Keep **Auto dimensions** enabled for the first test.
+9. Adjust Generic / DMD Custom values only if needed.
+10. Choose the cabinet **button color** if desired.
+11. Customize artwork.
+12. Check the result in the **3D Preview**.
+13. Use **VR Cleanup** if the source-table warning suggests it or if geometry conflicts are visible.
+14. Optionally enable the **Mixed Reality sphere**.
+15. Click **Inject VR** and choose the destination.
+16. Optionally let VPX VR Injector launch the generated table automatically.
 Suggested output filename:
 
 ```text
@@ -253,11 +300,15 @@ Chargez une table source, choisissez le cabinet et la Room Style, ajustez si né
 
 VPX VR Injector modifie directement les données OLE Compound File de VPX et injecte les objets 3D, textures, matériaux et VBScript nécessaires tout en préservant la table source.
 
+VPX VR Injector propose également un **mode Hybride expérimental**. Une table Hybride conserve le comportement 2D/Desktop d'origine et ajoute un ou plusieurs environnements VR activés automatiquement lorsque VPX fonctionne en VR.
+
 ### ✨ Fonctionnalités principales
 
 - 🎮 **Injection VR en un clic**
 - 📦 **Plusieurs Cabinet Packs**
 - 🏠 **Room Style indépendante** : Standard, Deluxe ou Ultra Minimal
+- 🧪 **Mode Hybride expérimental** conservant la table 2D/Desktop d'origine tout en ajoutant des Rooms VR sélectionnables
+- 🏠 **Plusieurs Rooms dans une même table Hybride** : Standard, Deluxe et Ultra Minimal, sélectionnables via F12
 - ⚡ **Dimensions automatiques** selon le playfield source
 - 🎛️ **Réglages Generic Width / Length / X / Y / Z**
 - 🔢 **Réglages DMD Custom X / Y / Depth / Width / Height**
@@ -272,6 +323,8 @@ VPX VR Injector modifie directement les données OLE Compound File de VPX et inj
 - ⇋ **Dupliquer à l'opposé**
 - 📋 **Coller une image depuis le presse-papiers**
 - 🎭 **Gestion automatique des masques `*_Empty`**
+- 🗂️ **Gestion des artworks Hybrid** avec états séparés Cabinet / Standard / Deluxe
+- 💾 **Presets d'artworks Hybrid** conservant les artworks d'une Room même lorsqu'elle est temporairement désactivée
 - 🧱 **Bibliothèque de textures intégrée** pour murs, sol et plafond de la Room Standard
 - 🖼️ **Bibliothèque de posters intégrée** pour Poster 1 / Poster 2 en Deluxe
 - ✨ **AI Artwork Assistant / Studio** pour Gemini et ChatGPT
@@ -338,6 +391,46 @@ Elle n'injecte **aucune géométrie de Room** : ni murs, ni sol, ni plafond, ni 
 
 L'Aperçu 3D utilise simplement un fond noir pour représenter l'environnement vide.
 
+### 🧪 Mode Hybride expérimental
+
+Le mode Hybride permet d'utiliser un même fichier `.vpx` généré en **2D/Desktop/Cabinet** et en **VR**.
+
+En mode 2D/Desktop :
+
+- la table source conserve son apparence et son comportement d'origine
+- l'image Desktop / Backdrop d'origine est conservée
+- les rails, lockbars et autres objets sélectionnés dans VR Cleanup gardent leur visibilité normale
+- les géométries de Room injectées restent masquées
+
+Lorsque VPX fonctionne en VR (`RenderingMode = 2`) :
+
+- le cabinet injecté est activé
+- l'environnement VR sélectionné est activé
+- les règles de visibilité VR Cleanup s'appliquent uniquement en VR
+- le support DigitGrid Hybrid utilise un affichage repositionné pour la VR tout en conservant le layout 2D d'origine
+
+Une table Hybride peut embarquer :
+
+- **Standard**
+- **Deluxe**
+- **Ultra Minimal**
+- **Mixed Reality**, si la sphère MR optionnelle est activée
+
+Si Deluxe est incluse, elle devient la Room VR par défaut. Les Rooms injectées peuvent ensuite être changées via **F12**.
+
+> **Le mode Hybride est expérimental.** Conservez la table source d'origine et testez la table générée en 2D/Desktop et en VR avant de remplacer une configuration existante.
+
+#### Personnalisation des artworks Hybrid
+
+Les artworks Hybrid sont organisés par contexte :
+
+- **Cabinet** — artworks cabinet/backbox/backglass communs à toutes les Rooms
+- **Standard** — Mur gauche, Mur droit, Sol et Plafond
+- **Deluxe** — Poster 1 et Poster 2
+- **Ultra Minimal** — aucun artwork spécifique à la Room
+
+Désactiver une Room n'efface pas ses artworks courants. Les presets Hybrid peuvent enregistrer et restaurer ensemble les artworks Cabinet, Standard et Deluxe, y compris ceux d'une Room temporairement désactivée.
+
 ### 🎨 Personnalisation des boutons du pincab
 
 La section **BUTTONS CUSTOM** permet de choisir une seule couleur appliquée aux deux boutons complets : bague fixe + poussoir central.
@@ -373,7 +466,7 @@ Les correspondances Rail/Lockbar/Lockdownbar par nom sont considérées comme de
 
 Si une ou plusieurs catégories sont détectées, une seule alerte récapitule le résultat et propose d'ouvrir **VR Cleanup**.
 
-VR Cleanup liste les GameItems source et regroupe automatiquement tous les éléments suggérés en haut de la liste. Vous pouvez ensuite sélectionner les objets à **Masquer en VR**. La table source n'est jamais modifiée : le masquage s'applique uniquement à la table VR générée.
+VR Cleanup liste les GameItems source et regroupe automatiquement tous les éléments suggérés en haut de la liste. Vous pouvez ensuite sélectionner les objets à **Masquer en VR**. La table source n'est jamais modifiée. Lors d'une injection VR classique, la table VR générée reçoit les changements de visibilité demandés ; en **mode Hybride**, ces objets sont forcés invisibles uniquement lorsque VPX fonctionne en VR afin de conserver l'apparence 2D/Desktop d'origine.
 
 ### 🌐 Intégration VPS
 
@@ -419,18 +512,19 @@ Les références source/externes, les workflows multi-slots, les masques `*_Empt
 1. Téléchargez et extrayez la dernière release.
 2. Lancez `VpxVRInjector.exe`.
 3. Choisissez un **Cabinet Pack**.
-4. Choisissez une **Room Style** : Standard, Deluxe ou Ultra Minimal.
-5. Chargez la table `.vpx` source.
-6. Consultez les éventuels résultats VPS / la suggestion de Cabinet Pack.
-7. Gardez **Dimensions auto** activé pour le premier essai.
-8. Ajustez les valeurs Generic / DMD Custom uniquement si nécessaire.
-9. Choisissez éventuellement la **couleur des boutons**.
-10. Personnalisez les artworks.
-11. Vérifiez le résultat dans l'**Aperçu 3D**.
-12. Utilisez **VR Cleanup** si l'alerte le suggère ou si des objets se superposent.
-13. Activez éventuellement la **sphère Mixed Reality**.
-14. Cliquez sur **Injecter VR** et choisissez la destination.
-15. Activez éventuellement le lancement automatique de la table générée.
+4. Choisissez le mode d'injection : **VR uniquement** ou **Hybride (expérimental)**.
+5. En VR uniquement, choisissez une **Room Style**. En Hybrid, choisissez les Rooms VR à inclure et personnalisez Cabinet / Standard / Deluxe si nécessaire.
+6. Chargez la table `.vpx` source.
+7. Consultez les éventuels résultats VPS / la suggestion de Cabinet Pack.
+8. Gardez **Dimensions auto** activé pour le premier essai.
+9. Ajustez les valeurs Generic / DMD Custom uniquement si nécessaire.
+10. Choisissez éventuellement la **couleur des boutons**.
+11. Personnalisez les artworks.
+12. Vérifiez le résultat dans l'**Aperçu 3D**.
+13. Utilisez **VR Cleanup** si l'alerte le suggère ou si des objets se superposent.
+14. Activez éventuellement la **sphère Mixed Reality**.
+15. Cliquez sur **Injecter VR** et choisissez la destination.
+16. Activez éventuellement le lancement automatique de la table générée.
 Nom suggéré :
 
 ```text
