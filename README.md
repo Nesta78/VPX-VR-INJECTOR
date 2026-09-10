@@ -5,7 +5,7 @@
 
 **Turn existing Visual Pinball X tables into VR-ready tables — with a modern guided interface, cabinet packs, Room environments, artwork tools, VPS integration and Hybrid support.**
 
-[![Version](https://img.shields.io/badge/version-3.7-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
+[![Version](https://img.shields.io/badge/version-3.8-blueviolet?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey?style=flat-square&logo=windows)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
 [![Language](https://img.shields.io/badge/UI-English%20%2F%20Français-6c5ce7?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR)
 [![Standalone](https://img.shields.io/badge/build-standalone-success?style=flat-square)](https://github.com/Nesta78/VPX-VR-INJECTOR/releases)
